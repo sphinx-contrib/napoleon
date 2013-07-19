@@ -45,17 +45,21 @@ both `Google`_ and `NumPy`_ style docstrings.
 Getting Started
 ---------------
 
-After `setting up Sphinx`_ to build your docs, install the
-`sphinxcontrib-napoleon`_ package::
+1. After `setting up Sphinx`_ to build your docs, install the
+   `sphinxcontrib-napoleon`_ package::
 
-    $ pip install sphinxcontrib-napoleon
+       $ pip install sphinxcontrib-napoleon
 
-Enable napoleon in the Sphinx `conf.py` file::
+2. Enable napoleon in the Sphinx `conf.py` file::
 
-    # conf.py
+       # conf.py
 
-    # Add autodoc and napoleon to the extensions list
-    extensions = ['sphinx.ext.autodoc', 'sphinxcontrib.napoleon']
+       # Add autodoc and napoleon to the extensions list
+       extensions = ['sphinx.ext.autodoc', 'sphinxcontrib.napoleon']
+
+3. Use `sphinx-apidoc` to build your API documentation::
+
+       $ sphinx-apidoc -f -o docs/source projectdir
 
 .. _setting up Sphinx: http://sphinx-doc.org/tutorial.html
 .. _sphinxcontrib-napoleon: http://pypi.python.org/pypi/sphinxcontrib-napoleon
@@ -65,9 +69,9 @@ Docstrings
 
 Napoleon supports two styles of docstrings: `Google`_ and `NumPy`_. The main
 difference between the two styles is that Google uses indention to separate
-sections, whereas NumPy uses underlines::
+sections, whereas NumPy uses underlines.
 
-    # Google Style
+Google style::
 
     Args:
         arg1 (int): Description of arg1
@@ -76,9 +80,7 @@ sections, whereas NumPy uses underlines::
     Returns:
         bool: Description of return value
 
-::
-
-    # NumPy Style
+NumPy style::
 
     Parameters
     ----------
@@ -129,12 +131,6 @@ The following section headers are supported:
    * :ref:`example_google`
    * :ref:`example_numpy`
 
-Advanced Configuration
-======================
-
-.. autoclass:: sphinxcontrib.napoleon.Config()
-   :noindex:
-
 Indices and Tables
 ==================
 
@@ -142,6 +138,7 @@ Indices and Tables
    :maxdepth: 1
    :hidden:
 
+   configuration
    sphinxcontrib.napoleon
    example_google
    example_numpy

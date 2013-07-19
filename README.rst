@@ -43,17 +43,21 @@ both `Google`_ and `NumPy`_ style docstrings.
 Getting Started
 ---------------
 
-After `setting up Sphinx`_ to build your project docs, install the
-`sphinxcontrib-napoleon`_ package::
+1. After `setting up Sphinx`_ to build your docs, install the
+   `sphinxcontrib-napoleon`_ package::
 
-    $ pip install sphinxcontrib-napoleon
+       $ pip install sphinxcontrib-napoleon
 
-Enable napoleon in the Sphinx `conf.py` file::
+2. Enable napoleon in the Sphinx `conf.py` file::
 
-    # conf.py
+       # conf.py
 
-    # Add autodoc and napoleon to the extensions list
-    extensions = ['sphinx.ext.autodoc', 'sphinxcontrib.napoleon']
+       # Add autodoc and napoleon to the extensions list
+       extensions = ['sphinx.ext.autodoc', 'sphinxcontrib.napoleon']
+
+3. Use `sphinx-apidoc` to build your API documentation::
+
+       $ sphinx-apidoc -f -o docs/source projectdir
 
 .. _setting up Sphinx: http://sphinx-doc.org/tutorial.html
 .. _sphinxcontrib-napoleon: http://pypi.python.org/pypi/sphinxcontrib-napoleon
@@ -63,9 +67,9 @@ Docstrings
 
 Napoleon supports two styles of docstrings: `Google`_ and `NumPy`_. The main
 difference between the two styles is that Google uses indention to separate
-sections, whereas NumPy uses underlines::
+sections, whereas NumPy uses underlines.
 
-    # Google Style
+Google style::
 
     Args:
         arg1 (int): Description of arg1
@@ -74,9 +78,7 @@ sections, whereas NumPy uses underlines::
     Returns:
         bool: Description of return value
 
-::
-
-    # NumPy Style
+NumPy style::
 
     Parameters
     ----------
@@ -98,19 +100,4 @@ long and in-depth docstrings.
 The choice between styles is largely aesthetic, but the two styles should not
 be mixed. Choose one style for your project and be consistent with it.
 
-Development Setup
------------------
-
-Prerequisites
-^^^^^^^^^^^^^
-* Python - ``sudo brew install python``
-* Paver - ``sudo pip install paver``
-
-Dev Environment
-^^^^^^^^^^^^^^^
-
-::
-
-    $ paver bootstrap
-    $ source virtualenv/bin/activate
-    $ python setup.py develop
+.. note:: For full documentation see http://relentlessidiot.com/napoleon/

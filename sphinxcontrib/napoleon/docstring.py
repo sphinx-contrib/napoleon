@@ -136,7 +136,7 @@ class GoogleDocstring(object):
 
         Returns
         -------
-        str
+        unicode
             Unicode version of the docstring.
 
         """
@@ -624,7 +624,7 @@ class NumpyDocstring(GoogleDocstring):
 
         Returns
         -------
-        str
+        unicode
             Unicode version of the docstring.
 
     lines()

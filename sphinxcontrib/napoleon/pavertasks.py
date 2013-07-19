@@ -4,8 +4,6 @@
 
 """Sphinx related paver tasks.
 
-.. _sphinx-apidoc: http://sphinx-doc.org/man/sphinx-apidoc.html
-
 Methods
 -------
 apidoc
@@ -24,10 +22,12 @@ apidoc
     * ``apidoc_overwrite`` -- (*bool*) True to overwrite existing files.
       Defaults to True
 
+    .. _sphinx-apidoc: http://sphinx-doc.org/man/sphinx-apidoc.html
+
     Example
     -------
 
-    Creating apidocs is easy with a `pavement.py` file like this::
+    Creating API documentation is easy with a `pavement.py` file like this::
 
         # pavement.py
 
@@ -90,7 +90,6 @@ except ImportError:
 
 
 def apidoc(options):
-    """Derive reStructuredText API doc files from python source code."""
     if not has_sphinx:
         raise BuildError('Install sphinx to build html docs')
 
@@ -123,7 +122,6 @@ def apidoc(options):
 
 
 def html(options):
-    """Build HTML documentation, including API documentation."""
     pass
 
 
@@ -131,3 +129,13 @@ if has_paver:
     apidoc = task(apidoc)
     html = task(needs('sphinxcontrib.napoleon.pavertasks.apidoc',
                       'paver.doctools.html')(html))
+else:
+    class _Task(object):
+        def __init__(self, func):
+            self.func = func
+
+        def __call__(self, *args, **kwargs):
+            self.func(*args, **kwargs)
+
+    apidoc = _Task(apidoc)
+    html = _Task(html)
