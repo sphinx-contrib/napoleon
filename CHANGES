@@ -2,7 +2,14 @@
 
 This file describes user-visible changes between the extension versions.
 
+Version 0.1.1 (2013-07-19)
+--------------------------
+
+* Adds documentation.
+* Fixes API docs for pavertasks.
+
+
 Version 0.1 (2013-07-18)
 ------------------------
 
-*  Initial version.
+* Initial version.
