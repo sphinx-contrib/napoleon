@@ -100,4 +100,4 @@ long and in-depth docstrings.
 The choice between styles is largely aesthetic, but the two styles should not
 be mixed. Choose one style for your project and be consistent with it.
 
-.. note:: For full documentation see http://relentlessidiot.com/napoleon/
+For full documentation see http://relentlessidiot.com/napoleon/
