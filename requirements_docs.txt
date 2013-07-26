@@ -1,1 +1,3 @@
 docutils>=0.10
+paver>=1.2.0
+Sphinx>=1.2b1

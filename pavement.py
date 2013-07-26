@@ -12,8 +12,7 @@ from paver.easy import (Bunch, call_task, consume_args, needs, no_help,
                         options, sh, task)
 
 
-reqs = (open('requirements.txt', 'r').read().strip().splitlines() +
-        open('requirements_docs.txt', 'r').read().strip().splitlines() +
+reqs = (open('requirements_docs.txt', 'r').read().strip().splitlines() +
         open('requirements_test.txt', 'r').read().strip().splitlines())
 reqs = filter(lambda s: not s.startswith('paver'), reqs)
 
