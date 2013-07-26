@@ -20,7 +20,6 @@ sys.path.insert(0, os.path.abspath('..'))
 on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 if on_rtd:
     html_theme = 'default'
-    os.chdir('napoleon')
 else:
     html_theme = 'armstrong'
     html_theme_path = ['_themes']
