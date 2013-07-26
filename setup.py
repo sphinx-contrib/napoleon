@@ -12,7 +12,7 @@ reqs_test = open('requirements_test.txt', 'r').read().strip().splitlines()
 
 setup(
     name='sphinxcontrib-napoleon',
-    version='0.1.1',
+    version='0.2',
     url='https://bitbucket.org/RelentlessIdiot/sphinx-contrib',
     download_url='http://pypi.python.org/pypi/sphinxcontrib-napoleon',
     license='BSD',

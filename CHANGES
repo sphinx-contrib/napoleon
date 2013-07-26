@@ -2,6 +2,19 @@
 
 This file describes user-visible changes between the extension versions.
 
+Version 0.2 (2013-07-26)
+------------------------
+
+* Adds special handling for ``Keyword Arguments``
+* Adds aliases for common section headers:
+
+    * ``Args`` *(alias of Parameters)*
+    * ``Arguments`` *(alias of Parameters)*
+    * ``Keyword Args`` *(alias of Keyword Arguments)*
+    * ``Return`` *(alias of Returns)*
+    * ``Warnings`` *(alias of Warning)*
+
+
 Version 0.1.1 (2013-07-19)
 --------------------------
 
