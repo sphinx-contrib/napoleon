@@ -30,7 +30,7 @@ Much more legible, no?
 
 Napoleon is a `Sphinx extension`_ that allows you to write readable API
 documentation in your source code. Napoleon understands both `NumPy`_ and
-`Google`_ style docstrings -- the style recommended by `Khan Academy`_.
+`Google`_ style docstrings - the style recommended by `Khan Academy`_.
 
 .. _ReStructuredText: http://docutils.sourceforge.net/rst.html
 .. _docstrings: http://www.python.org/dev/peps/pep-0287/
