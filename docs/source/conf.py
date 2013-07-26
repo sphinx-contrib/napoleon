@@ -15,7 +15,8 @@ import sys
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-sys.path.insert(0, os.path.abspath(os.path.join(__file__, '..', '..')))
+basedir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+sys.path.insert(0, basedir)
 
 on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 if on_rtd:
@@ -23,7 +24,6 @@ if on_rtd:
 else:
     html_theme = 'armstrong'
     html_theme_path = ['_themes']
-
 
 # -- Options for Napoleon Extension --------------------------------------------
 
