@@ -52,7 +52,12 @@ class GoogleDocstringTest(BaseDocstringTest):
             description of arg1
           arg2 ( int ) : Extended
             description of arg2
-        """,
+
+        Keyword Args:
+          kwarg1(str):Extended
+            description of kwarg1
+          kwarg2 ( int ) : Extended
+            description of kwarg2""",
         """
         Single line summary
 
@@ -61,7 +66,59 @@ class GoogleDocstringTest(BaseDocstringTest):
                        description of arg1
                      * **arg2** (*int*) --
                        Extended
-                       description of arg2"""
+                       description of arg2
+
+        :Keyword Arguments: * **kwarg1** (*str*) --
+                              Extended
+                              description of kwarg1
+                            * **kwarg2** (*int*) --
+                              Extended
+                              description of kwarg2"""
+    ), (
+        """
+        Single line summary
+
+        Arguments:
+          arg1(str):Extended
+            description of arg1
+          arg2 ( int ) : Extended
+            description of arg2
+
+        Keyword Arguments:
+          kwarg1(str):Extended
+            description of kwarg1
+          kwarg2 ( int ) : Extended
+            description of kwarg2""",
+        """
+        Single line summary
+
+        :Parameters: * **arg1** (*str*) --
+                       Extended
+                       description of arg1
+                     * **arg2** (*int*) --
+                       Extended
+                       description of arg2
+
+        :Keyword Arguments: * **kwarg1** (*str*) --
+                              Extended
+                              description of kwarg1
+                            * **kwarg2** (*int*) --
+                              Extended
+                              description of kwarg2"""
+    ), (
+        """
+        Single line summary
+
+        Return:
+          str:Extended
+          description of return value
+        """,
+        """
+        Single line summary
+
+        :returns: *str* --
+                  Extended
+                  description of return value"""
     ), (
         """
         Single line summary
@@ -81,7 +138,8 @@ class GoogleDocstringTest(BaseDocstringTest):
     def test_docstrings(self):
         for docstring, expected in self.docstrings:
             actual = str(GoogleDocstring(textwrap.dedent(docstring)))
-            self.assertEqual(textwrap.dedent(expected), actual)
+            expected = textwrap.dedent(expected)
+            self.assertEqual(expected, actual)
 
 
 class NumpyDocstringTest(BaseDocstringTest):
@@ -128,6 +186,15 @@ class NumpyDocstringTest(BaseDocstringTest):
         arg2 : int
             Extended
             description of arg2
+
+        Keyword Arguments
+        -----------------
+          kwarg1:str
+              Extended
+              description of kwarg1
+          kwarg2 : int
+              Extended
+              description of kwarg2
         """,
         """
         Single line summary
@@ -137,7 +204,30 @@ class NumpyDocstringTest(BaseDocstringTest):
                        description of arg1
                      * **arg2** (*int*) --
                        Extended
-                       description of arg2"""
+                       description of arg2
+
+        :Keyword Arguments: * **kwarg1** (*str*) --
+                              Extended
+                              description of kwarg1
+                            * **kwarg2** (*int*) --
+                              Extended
+                              description of kwarg2"""
+    ), (
+        """
+        Single line summary
+
+        Return
+        ------
+        str
+            Extended
+            description of return value
+        """,
+        """
+        Single line summary
+
+        :returns: *str* --
+                  Extended
+                  description of return value"""
     ), (
         """
         Single line summary
@@ -159,4 +249,5 @@ class NumpyDocstringTest(BaseDocstringTest):
     def test_docstrings(self):
         for docstring, expected in self.docstrings:
             actual = str(NumpyDocstring(textwrap.dedent(docstring)))
-            self.assertEqual(textwrap.dedent(expected), actual)
+            expected = textwrap.dedent(expected)
+            self.assertEqual(expected, actual)

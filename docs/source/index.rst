@@ -1,7 +1,7 @@
 .. Napoleon documentation master file.
 
-Napoleon -- Marching toward legible docstrings
-==============================================
+Napoleon -- *Marching toward legible docstrings*
+================================================
 
 Are you tired of writing docstrings that look like this::
 
@@ -16,7 +16,7 @@ Are you tired of writing docstrings that look like this::
     :rtype: BufferedFileStorage
 
 `ReStructuredText`_ is great, but it creates visually dense, hard to read
-`docstrings`_. Compare the mess above to the same thing rewritten
+`docstrings`_. Compare the jumble above to the same thing rewritten
 according to the `Google Python Style Guide`_::
 
     Args:
@@ -28,9 +28,11 @@ according to the `Google Python Style Guide`_::
     Returns:
         BufferedFileStorage: A buffered writable file descriptor
 
-Much more legible, no? Napoleon is a `Sphinx extension`_ that allows you to
-write readable API documentation in your source code. Napoleon understands
-both `Google`_ and `NumPy`_ style docstrings.
+Much more legible, no?
+
+Napoleon is a `Sphinx extension`_ that allows you to write readable API
+documentation in your source code. Napoleon understands both `NumPy`_ and
+`Google`_ style docstrings -- the style recommended by `Khan Academy`_.
 
 .. _ReStructuredText: http://docutils.sourceforge.net/rst.html
 .. _docstrings: http://www.python.org/dev/peps/pep-0287/
@@ -41,6 +43,8 @@ both `Google`_ and `NumPy`_ style docstrings.
    http://google-styleguide.googlecode.com/svn/trunk/pyguide.html#Comments
 .. _NumPy:
    https://github.com/numpy/numpy/blob/master/doc/HOWTO_DOCUMENT.rst.txt
+.. _Khan Academy:
+   https://sites.google.com/a/khanacademy.org/forge/for-developers/styleguide/python#TOC-Docstrings
 
 Getting Started
 ---------------
@@ -67,66 +71,103 @@ Getting Started
 Docstrings
 ==========
 
+Napoleon interprets every docstring that `Sphinx autodoc`_ can find, including
+docstrings on: ``modules``, ``classes``, ``attributes``, ``methods``,
+``functions``, and ``variables``. Inside each docstring, specially formatted
+`Sections`_ are parsed and converted to reStructuredText.
+
+All standard reStructuredText formatting still works as expected.
+
+.. _Sphinx autodoc: http://sphinx-doc.org/ext/autodoc.html
+
+Google vs NumPy
+---------------
+
 Napoleon supports two styles of docstrings: `Google`_ and `NumPy`_. The main
 difference between the two styles is that Google uses indention to separate
 sections, whereas NumPy uses underlines.
 
 Google style::
 
-    Args:
-        arg1 (int): Description of arg1
-        arg2 (str): Description of arg2
+    def func(arg1, arg2):
+        """Summary line.
 
-    Returns:
-        bool: Description of return value
+        Extended description of function.
+
+        Args:
+            arg1 (int): Description of arg1
+            arg2 (str): Description of arg2
+
+        Returns:
+            bool: Description of return value
+
+        """
+        return True
 
 NumPy style::
 
-    Parameters
-    ----------
-    arg1 : int
-        Description of arg1
-    arg2 : str
-        Description of arg2
+    def func(arg1, arg2):
+        """Summary line.
 
-    Returns
-    -------
-    bool
-        Description of return value
+        Extended description of function.
+
+        Parameters
+        ----------
+        arg1 : int
+            Description of arg1
+        arg2 : str
+            Description of arg2
+
+        Returns
+        -------
+        bool
+            Description of return value
+
+        """
+        return True
 
 NumPy style tends to require more vertical space, whereas Google style tends
 to use more horizontal space. Google style tends to be easier to read for
 short and simple docstrings, whereas NumPy style tends be easier to read for
 long and in-depth docstrings.
 
+The `Khan Academy`_ recommends using Google style.
+
 The choice between styles is largely aesthetic, but the two styles should not
 be mixed. Choose one style for your project and be consistent with it.
+
+.. _Sections:
 
 Sections
 --------
 
-The following section headers are supported:
+All of the following section headers are supported:
 
-    * Args
-    * Attributes
-    * Example
-    * Examples
-    * Keyword Arguments
-    * Methods
-    * Note
-    * Notes
-    * Other Parameters
-    * Parameters
-    * Returns
-    * Raises
-    * References
-    * See Also
-    * Warning
-    * Warnings
-    * Warns
-    * Yields
+    * ``Args`` *(alias of Parameters)*
+    * ``Arguments`` *(alias of Parameters)*
+    * ``Attributes``
+    * ``Example``
+    * ``Examples``
+    * ``Keyword Args`` *(alias of Keyword Arguments)*
+    * ``Keyword Arguments``
+    * ``Methods``
+    * ``Note``
+    * ``Notes``
+    * ``Other Parameters``
+    * ``Parameters``
+    * ``Return`` *(alias of Returns)*
+    * ``Returns``
+    * ``Raises``
+    * ``References``
+    * ``See Also``
+    * ``Warning``
+    * ``Warnings`` *(alias of Warning)*
+    * ``Warns``
+    * ``Yields``
 
 .. seealso::
+
+   For complete examples:
 
    * :ref:`example_google`
    * :ref:`example_numpy`

@@ -6,6 +6,7 @@
 
 import os
 import shutil
+from paver.easy import options
 from sphinxcontrib.napoleon.pavertasks import apidoc, html
 from unittest import TestCase
 
@@ -16,15 +17,13 @@ class BasePavertasksTest(TestCase):
             os.makedirs('tests/docs/build')
         if not os.path.exists('tests/docs/source'):
             os.makedirs('tests/docs/source')
-        self.options = {
-            'apidoc_excludes': [],
-            'apidoc_moduledir': 'tests',
-            'apidoc_outputdir': 'tests/docs/source',
-            'apidoc_overwrite': True,
-            'builddir': 'build',
-            'docroot': 'tests/docs',
-            'sourcedir': 'source',
-        }
+        options.apidoc_excludes = []
+        options.apidoc_moduledir = 'tests'
+        options.apidoc_outputdir = 'tests/docs/source'
+        options.apidoc_overwrite = True
+        options.builddir = 'build'
+        options.docroot = 'tests/docs'
+        options.sourcedir = 'source'
 
     def tearDown(self):
         if os.path.exists('tests/docs/build'):
@@ -34,9 +33,9 @@ class BasePavertasksTest(TestCase):
 
 class ApidocTest(BasePavertasksTest):
     def test_apidoc(self):
-        apidoc(self.options)
+        apidoc(options)
 
 
 class HtmlTest(BasePavertasksTest):
     def test_html(self):
-        html(self.options)
+        html(options)

@@ -100,15 +100,18 @@ class GoogleDocstring(object):
         if not hasattr(self, '_sections'):
             self._sections = {
                 'args': self._parse_parameters_section,
+                'arguments': self._parse_parameters_section,
                 'attributes': self._parse_attributes_section,
                 'example': self._parse_examples_section,
                 'examples': self._parse_examples_section,
-                'keyword arguments': self._parse_parameters_section,
+                'keyword args': self._parse_keyword_arguments_section,
+                'keyword arguments': self._parse_keyword_arguments_section,
                 'methods': self._parse_methods_section,
                 'note': self._parse_note_section,
                 'notes': self._parse_notes_section,
                 'other parameters': self._parse_other_parameters_section,
                 'parameters': self._parse_parameters_section,
+                'return': self._parse_returns_section,
                 'returns': self._parse_returns_section,
                 'raises': self._parse_raises_section,
                 'references': self._parse_references_section,
@@ -258,10 +261,13 @@ class GoogleDocstring(object):
                 padding = ' ' * len(prefix)
             result_lines = []
             for i, line in enumerate(lines):
-                if i == 0:
-                    result_lines.append(prefix + line)
+                if line:
+                    if i == 0:
+                        result_lines.append(prefix + line)
+                    else:
+                        result_lines.append(padding + line)
                 else:
-                    result_lines.append(padding + line)
+                    result_lines.append('')
             return result_lines
         else:
             return [prefix]
@@ -411,6 +417,9 @@ class GoogleDocstring(object):
         else:
             return [header, '']
 
+    def _parse_keyword_arguments_section(self, section):
+        return self._format_fields('Keyword Arguments', self._consume_fields())
+
     def _parse_methods_section(self, section):
         lines = []
         for _name, _, _desc in self._consume_fields(parse_type=False):
@@ -429,7 +438,7 @@ class GoogleDocstring(object):
         return self._parse_generic_section('Notes', use_admonition)
 
     def _parse_other_parameters_section(self, section):
-        return self._format_fields('Other Params', self._consume_fields())
+        return self._format_fields('Other Parameters', self._consume_fields())
 
     def _parse_parameters_section(self, section):
         fields = self._consume_fields()

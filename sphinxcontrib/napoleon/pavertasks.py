@@ -72,14 +72,8 @@ html
 """
 
 import os
+from paver.easy import BuildFailure, needs, task
 
-try:
-    from paver.easy import BuildFailure, needs, task
-    has_paver = True
-    BuildError = BuildFailure
-except ImportError:
-    has_paver = False
-    BuildError = ValueError
 
 try:
     import sphinx
@@ -89,22 +83,23 @@ except ImportError:
     has_sphinx = False
 
 
+@task
 def apidoc(options):
     if not has_sphinx:
-        raise BuildError('Install sphinx to build html docs')
+        raise BuildFailure('Install sphinx to build html docs')
 
     outputdir = options.get('apidoc_outputdir', '')
     if not outputdir:
         docroot = options.get('docroot', 'docs')
         if not os.path.exists(docroot):
-            raise BuildError('Doc root dir (%s) does not exist' % docroot)
+            raise BuildFailure('Doc root dir (%s) does not exist' % docroot)
         outputdir = os.path.join(docroot, options.get('sourcedir', ''))
     if not os.path.exists(outputdir):
-        raise BuildError('Doc source dir (%s) does not exist' % outputdir)
+        raise BuildFailure('Doc source dir (%s) does not exist' % outputdir)
 
     moduledir = options.get('apidoc_moduledir', '.')
     if not os.path.exists(moduledir):
-        raise BuildError('Module dir (%s) does not exist' % moduledir)
+        raise BuildFailure('Module dir (%s) does not exist' % moduledir)
 
     excludes = options.get('apidoc_excludes', [])
     if isinstance(excludes, basestring):
@@ -121,21 +116,7 @@ def apidoc(options):
     main(args)
 
 
+@task
+@needs('sphinxcontrib.napoleon.pavertasks.apidoc', 'paver.doctools.html')
 def html(options):
     pass
-
-
-if has_paver:
-    apidoc = task(apidoc)
-    html = task(needs('sphinxcontrib.napoleon.pavertasks.apidoc',
-                      'paver.doctools.html')(html))
-else:
-    class _Task(object):
-        def __init__(self, func):
-            self.func = func
-
-        def __call__(self, *args, **kwargs):
-            self.func(*args, **kwargs)
-
-    apidoc = _Task(apidoc)
-    html = _Task(html)
