@@ -17,7 +17,7 @@ if sys.version_info >= (3,):
 
 setup(
     name='sphinxcontrib-napoleon',
-    version='0.2.1',
+    version='0.2.2',
     url='https://bitbucket.org/birkenfeld/sphinx-contrib',
     download_url='http://pypi.python.org/pypi/sphinxcontrib-napoleon',
     license='BSD',
