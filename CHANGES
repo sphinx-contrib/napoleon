@@ -2,6 +2,14 @@
 
 This file describes user-visible changes between the extension versions.
 
+Version 0.2.3 (2014-01-16)
+--------------------------
+
+* Adds python 3.1 support
+* Fixes tests for python 3.*
+* Adds tox environments: py26,py27,py31,py32,py33,pypy
+
+
 Version 0.2.2 (2013-12-13)
 --------------------------
 

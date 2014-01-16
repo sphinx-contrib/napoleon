@@ -11,13 +11,13 @@ reqs = open('requirements.txt', 'r').read().strip().splitlines()
 reqs_test = open('requirements_test.txt', 'r').read().strip().splitlines()
 
 extra = {}
-if sys.version_info >= (3,):
+if sys.version_info[0] >= 3:
     extra['use_2to3'] = True
     extra['use_2to3_on_doctests'] = True
 
 setup(
     name='sphinxcontrib-napoleon',
-    version='0.2.2',
+    version='0.2.3',
     url='https://bitbucket.org/birkenfeld/sphinx-contrib',
     download_url='http://pypi.python.org/pypi/sphinxcontrib-napoleon',
     license='BSD',
@@ -34,6 +34,8 @@ setup(
         'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 3',
         'Topic :: Documentation',
         'Topic :: Utilities',
     ],

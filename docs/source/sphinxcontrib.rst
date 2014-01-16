@@ -1,13 +1,5 @@
-sphinxcontrib Package
+sphinxcontrib package
 =====================
-
-:mod:`sphinxcontrib` Package
-----------------------------
-
-.. automodule:: sphinxcontrib.__init__
-    :members:
-    :undoc-members:
-    :show-inheritance:
 
 Subpackages
 -----------
@@ -16,3 +8,10 @@ Subpackages
 
     sphinxcontrib.napoleon
 
+Module contents
+---------------
+
+.. automodule:: sphinxcontrib
+    :members:
+    :undoc-members:
+    :show-inheritance:

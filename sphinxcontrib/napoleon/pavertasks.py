@@ -73,6 +73,7 @@ html
 
 import os
 from paver.easy import BuildFailure, needs, task
+from sphinxcontrib.napoleon.compatibility import string_types
 
 
 try:
@@ -102,7 +103,7 @@ def apidoc(options):
         raise BuildFailure('Module dir (%s) does not exist' % moduledir)
 
     excludes = options.get('apidoc_excludes', [])
-    if isinstance(excludes, basestring):
+    if isinstance(excludes, string_types):
         excludes = [excludes]
 
     if options.get('apidoc_overwrite', True):

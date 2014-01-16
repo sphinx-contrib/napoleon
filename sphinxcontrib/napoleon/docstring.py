@@ -4,7 +4,12 @@
 
 """Classes for docstring parsing and formatting."""
 
+from __future__ import division
+from __future__ import absolute_import
+
 import re
+from sphinxcontrib.napoleon.compatibility import (string_types, u,
+                                                  UnicodeMixin, xrange)
 from sphinxcontrib.napoleon.iterators import modify_iter
 
 
@@ -12,7 +17,7 @@ _directive_regex = re.compile(r'\.\. \S+::')
 _field_parens_regex = re.compile(r'\s*(\w+)\s*\(\s*(.+?)\s*\)')
 
 
-class GoogleDocstring(object):
+class GoogleDocstring(UnicodeMixin):
     """Parse Google style docstrings.
 
     Convert Google style docstrings to reStructuredText.
@@ -88,7 +93,7 @@ class GoogleDocstring(object):
         self._name = name
         self._obj = obj
         self._opt = options
-        if isinstance(docstring, basestring):
+        if isinstance(docstring, string_types):
             docstring = docstring.splitlines()
         self._lines = docstring
         self._line_iter = modify_iter(docstring, modifier=lambda s: s.rstrip())
@@ -123,17 +128,6 @@ class GoogleDocstring(object):
             }
         self._parse()
 
-    def __str__(self):
-        """Return the parsed docstring in reStructuredText format.
-
-        Returns
-        -------
-        str
-            UTF-8 encoded version of the docstring.
-
-        """
-        return unicode(self).encode('utf-8')
-
     def __unicode__(self):
         """Return the parsed docstring in reStructuredText format.
 
@@ -143,7 +137,7 @@ class GoogleDocstring(object):
             Unicode version of the docstring.
 
         """
-        return '\n'.join(self.lines())
+        return u('\n').join(self.lines())
 
     def lines(self):
         """Return the parsed lines of the docstring in reStructuredText format.
@@ -687,7 +681,7 @@ class NumpyDocstring(GoogleDocstring):
     def _is_section_header(self):
         section, underline = self._line_iter.peek(2)
         section = section.lower()
-        if section in self._sections and isinstance(underline, basestring):
+        if section in self._sections and isinstance(underline, string_types):
             pattern = r'[=\-`:\'"~^_*+#<>]{' + str(len(section)) + r'}$'
             return bool(re.match(pattern, underline))
         elif self._directive_sections:

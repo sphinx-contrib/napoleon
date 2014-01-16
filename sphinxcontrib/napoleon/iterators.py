@@ -5,6 +5,7 @@
 """A collection of helpful iterators."""
 
 import collections
+from sphinxcontrib.napoleon.compatibility import callable
 
 
 class peek_iter(object):

@@ -4,6 +4,7 @@
 
 """Sphinx napoleon extension."""
 
+import sys
 from sphinxcontrib.napoleon.docstring import GoogleDocstring, NumpyDocstring
 
 
@@ -311,7 +312,7 @@ def _skip_member(app, what, name, obj, skip, options):
     app : sphinx.application.Sphinx
         Application object representing the Sphinx process
     what : str
-        A string specifying the type of the object to which the  member
+        A string specifying the type of the object to which the member
         belongs. Valid values: "module", "class", "exception", "function",
         "method", "attribute".
     name : str
@@ -338,8 +339,27 @@ def _skip_member(app, what, name, obj, skip, options):
     has_doc = getattr(obj, '__doc__', False)
     is_member = (what == 'class' or what == 'exception' or what == 'module')
     if name != '__weakref__' and name != '__init__' and has_doc and is_member:
-        cls = getattr(obj, 'im_class', getattr(obj, '__objclass__', None))
-        cls_is_owner = (cls and hasattr(cls, name) and name in cls.__dict__)
+        if what == 'class' or what == 'exception':
+            if sys.version_info[0] < 3:
+                cls = getattr(obj, 'im_class', getattr(obj, '__objclass__',
+                              None))
+                cls_is_owner = (cls and hasattr(cls, name) and
+                                name in cls.__dict__)
+            elif sys.version_info[1] >= 3 and hasattr(obj, '__qualname__'):
+                cls_path, _, _ = obj.__qualname__.rpartition('.')
+                if cls_path:
+                    import importlib
+                    import functools
+
+                    mod = importlib.import_module(obj.__module__)
+                    cls = functools.reduce(getattr, cls_path.split('.'), mod)
+                    cls_is_owner = (cls and hasattr(cls, name) and
+                                    name in cls.__dict__)
+                else:
+                    cls_is_owner = False
+            else:
+                cls_is_owner = True
+
         if what == 'module' or cls_is_owner:
             is_special = name.startswith('__') and name.endswith('__')
             is_private = not is_special and name.startswith('_')
