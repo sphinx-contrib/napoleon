@@ -1,11 +1,15 @@
+:orphan:
+
 .. _example_google:
 
 Example Google Style Python Docstrings
 ======================================
 
-.. seealso:: :ref:`example_numpy`
+.. seealso::
 
-Download: :download:`example_google.py <example_google.txt>`
+   :ref:`example_numpy`
 
-.. literalinclude:: example_google.txt
+Download: :download:`example_google.py <example_google.py>`
+
+.. literalinclude:: example_google.py
    :language: python

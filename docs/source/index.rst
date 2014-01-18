@@ -1,7 +1,7 @@
 .. Napoleon documentation master file.
 
-Napoleon -- *Marching toward legible docstrings*
-================================================
+Napoleon - *Marching toward legible docstrings*
+===============================================
 
 Are you tired of writing docstrings that look like this::
 
@@ -49,43 +49,69 @@ documentation in your source code. Napoleon understands both `NumPy`_ and
 Getting Started
 ---------------
 
-1. After `setting up Sphinx`_ to build your docs, install the
-   `sphinxcontrib-napoleon`_ package::
-
-       $ pip install sphinxcontrib-napoleon
-
-2. Enable napoleon in the Sphinx `conf.py` file::
+1. After `setting up Sphinx`_ to build your docs, enable napoleon in the
+   Sphinx `conf.py` file::
 
        # conf.py
 
        # Add autodoc and napoleon to the extensions list
        extensions = ['sphinx.ext.autodoc', 'sphinxcontrib.napoleon']
 
-3. Use `sphinx-apidoc` to build your API documentation::
+2. Use `sphinx-apidoc` to build your API documentation::
 
        $ sphinx-apidoc -f -o docs/source projectdir
 
 .. _setting up Sphinx: http://sphinx-doc.org/tutorial.html
-.. _sphinxcontrib-napoleon: http://pypi.python.org/pypi/sphinxcontrib-napoleon
 
 Docstrings
-==========
+----------
 
-Napoleon interprets every docstring that `Sphinx autodoc`_ can find, including
-docstrings on: ``modules``, ``classes``, ``attributes``, ``methods``,
-``functions``, and ``variables``. Inside each docstring, specially formatted
-`Sections`_ are parsed and converted to reStructuredText.
+Napoleon interprets every docstring that `Sphinx autodoc`_ can find,
+including docstrings on: ``modules``, ``classes``, ``attributes``,
+``methods``, ``functions``, and ``variables``. Inside each docstring,
+specially formatted `Sections`_ are parsed and converted to
+reStructuredText.
 
 All standard reStructuredText formatting still works as expected.
 
 .. _Sphinx autodoc: http://sphinx-doc.org/ext/autodoc.html
 
+
+.. _Sections:
+
+Docstring Sections
+------------------
+
+All of the following section headers are supported:
+
+    * ``Args`` *(alias of Parameters)*
+    * ``Arguments`` *(alias of Parameters)*
+    * ``Attributes``
+    * ``Example``
+    * ``Examples``
+    * ``Keyword Args`` *(alias of Keyword Arguments)*
+    * ``Keyword Arguments``
+    * ``Methods``
+    * ``Note``
+    * ``Notes``
+    * ``Other Parameters``
+    * ``Parameters``
+    * ``Return`` *(alias of Returns)*
+    * ``Returns``
+    * ``Raises``
+    * ``References``
+    * ``See Also``
+    * ``Warning``
+    * ``Warnings`` *(alias of Warning)*
+    * ``Warns``
+    * ``Yields``
+
 Google vs NumPy
 ---------------
 
-Napoleon supports two styles of docstrings: `Google`_ and `NumPy`_. The main
-difference between the two styles is that Google uses indention to separate
-sections, whereas NumPy uses underlines.
+Napoleon supports two styles of docstrings: `Google`_ and `NumPy`_. The
+main difference between the two styles is that Google uses indention to
+separate sections, whereas NumPy uses underlines.
 
 Google style::
 
@@ -126,44 +152,15 @@ NumPy style::
         """
         return True
 
-NumPy style tends to require more vertical space, whereas Google style tends
-to use more horizontal space. Google style tends to be easier to read for
-short and simple docstrings, whereas NumPy style tends be easier to read for
-long and in-depth docstrings.
+NumPy style tends to require more vertical space, whereas Google style
+tends to use more horizontal space. Google style tends to be easier to
+read for short and simple docstrings, whereas NumPy style tends be easier
+to read for long and in-depth docstrings.
 
 The `Khan Academy`_ recommends using Google style.
 
-The choice between styles is largely aesthetic, but the two styles should not
-be mixed. Choose one style for your project and be consistent with it.
-
-.. _Sections:
-
-Sections
---------
-
-All of the following section headers are supported:
-
-    * ``Args`` *(alias of Parameters)*
-    * ``Arguments`` *(alias of Parameters)*
-    * ``Attributes``
-    * ``Example``
-    * ``Examples``
-    * ``Keyword Args`` *(alias of Keyword Arguments)*
-    * ``Keyword Arguments``
-    * ``Methods``
-    * ``Note``
-    * ``Notes``
-    * ``Other Parameters``
-    * ``Parameters``
-    * ``Return`` *(alias of Returns)*
-    * ``Returns``
-    * ``Raises``
-    * ``References``
-    * ``See Also``
-    * ``Warning``
-    * ``Warnings`` *(alias of Warning)*
-    * ``Warns``
-    * ``Yields``
+The choice between styles is largely aesthetic, but the two styles should
+not be mixed. Choose one style for your project and be consistent with it.
 
 .. seealso::
 
@@ -172,18 +169,15 @@ All of the following section headers are supported:
    * :ref:`example_google`
    * :ref:`example_numpy`
 
-Indices and Tables
-==================
+Configuration
+=============
 
+.. autoclass:: sphinxcontrib.napoleon.Config
+
+Index
+=====
 .. toctree::
    :maxdepth: 1
-   :hidden:
-
-   configuration
-   sphinxcontrib.napoleon
-   example_google
-   example_numpy
-   modules
 
 * :ref:`genindex`
 * :ref:`modindex`

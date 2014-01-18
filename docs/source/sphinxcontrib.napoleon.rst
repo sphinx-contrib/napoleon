@@ -4,14 +4,6 @@ sphinxcontrib.napoleon package
 Submodules
 ----------
 
-sphinxcontrib.napoleon.compatibility module
--------------------------------------------
-
-.. automodule:: sphinxcontrib.napoleon.compatibility
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 sphinxcontrib.napoleon.docstring module
 ---------------------------------------
 

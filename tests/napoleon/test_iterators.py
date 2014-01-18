@@ -1,12 +1,18 @@
 # -*- coding: utf-8 -*-
-# Copyright 2013 Rob Ruana
+# Copyright 2014 Rob Ruana
 # Licensed under the BSD License, see LICENSE file for details.
 
 """Tests for :mod:`sphinxcontrib.napoleon.iterators` module."""
 
-from sphinxcontrib.napoleon.compatibility import u
+import sys
 from sphinxcontrib.napoleon.iterators import peek_iter, modify_iter
 from unittest import TestCase
+
+
+if sys.version_info[0] >= 3:
+    u = lambda s: s
+else:
+    u = lambda s: unicode(s.replace(r'\\', r'\\\\'), "unicode_escape")
 
 
 class BaseIteratorsTest(TestCase):

@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
-# Copyright 2013 Rob Ruana
+# Copyright 2014 Rob Ruana
 # Licensed under the BSD License, see LICENSE file for details.
 
 """A collection of helpful iterators."""
 
 import collections
-from sphinxcontrib.napoleon.compatibility import callable
+import sys
+
+
+if sys.version_info[0] >= 3:
+    callable = lambda o: hasattr(o, '__call__')
 
 
 class peek_iter(object):
@@ -53,10 +57,10 @@ class peek_iter(object):
     def __iter__(self):
         return self
 
-    def __next__(self):
+    def __next__(self, n=None):
         # note: prevent 2to3 to transform self.next() in next(self) which
         # causes an infinite loop !
-        return getattr(self, 'next')()
+        return getattr(self, 'next')(n)
 
     def _fillcache(self, n):
         """Cache `n` items. If `n` is 0 or None, then 1 item is cached."""

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2013 Rob Ruana
+# Copyright 2014 Rob Ruana
 # Licensed under the BSD License, see LICENSE file for details.
 
 """Tests for :mod:`sphinxcontrib.napoleon.docstring` module."""

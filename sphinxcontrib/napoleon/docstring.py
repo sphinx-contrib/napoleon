@@ -1,23 +1,24 @@
 # -*- coding: utf-8 -*-
-# Copyright 2013 Rob Ruana
+# Copyright 2014 Rob Ruana
 # Licensed under the BSD License, see LICENSE file for details.
 
 """Classes for docstring parsing and formatting."""
 
-from __future__ import division
-from __future__ import absolute_import
-
 import re
-from sphinxcontrib.napoleon.compatibility import (string_types, u,
-                                                  UnicodeMixin, xrange)
+import sys
 from sphinxcontrib.napoleon.iterators import modify_iter
+
+
+if sys.version_info[0] >= 3:
+    basestring = str
+    xrange = range
 
 
 _directive_regex = re.compile(r'\.\. \S+::')
 _field_parens_regex = re.compile(r'\s*(\w+)\s*\(\s*(.+?)\s*\)')
 
 
-class GoogleDocstring(UnicodeMixin):
+class GoogleDocstring(object):
     """Parse Google style docstrings.
 
     Convert Google style docstrings to reStructuredText.
@@ -93,7 +94,7 @@ class GoogleDocstring(UnicodeMixin):
         self._name = name
         self._obj = obj
         self._opt = options
-        if isinstance(docstring, string_types):
+        if isinstance(docstring, basestring):
             docstring = docstring.splitlines()
         self._lines = docstring
         self._line_iter = modify_iter(docstring, modifier=lambda s: s.rstrip())
@@ -128,6 +129,20 @@ class GoogleDocstring(UnicodeMixin):
             }
         self._parse()
 
+    def __str__(self):
+        """Return the parsed docstring in reStructuredText format.
+
+        Returns
+        -------
+        str
+            UTF-8 encoded version of the docstring.
+
+        """
+        if sys.version_info[0] >= 3:
+            return self.__unicode__()
+        else:
+            return self.__unicode__().encode('utf8')
+
     def __unicode__(self):
         """Return the parsed docstring in reStructuredText format.
 
@@ -137,7 +152,7 @@ class GoogleDocstring(UnicodeMixin):
             Unicode version of the docstring.
 
         """
-        return u('\n').join(self.lines())
+        return u'\n'.join(self.lines())
 
     def lines(self):
         """Return the parsed lines of the docstring in reStructuredText format.
@@ -681,7 +696,7 @@ class NumpyDocstring(GoogleDocstring):
     def _is_section_header(self):
         section, underline = self._line_iter.peek(2)
         section = section.lower()
-        if section in self._sections and isinstance(underline, string_types):
+        if section in self._sections and isinstance(underline, basestring):
             pattern = r'[=\-`:\'"~^_*+#<>]{' + str(len(section)) + r'}$'
             return bool(re.match(pattern, underline))
         elif self._directive_sections:

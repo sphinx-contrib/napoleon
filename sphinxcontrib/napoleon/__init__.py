@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-# Copyright 2013 Rob Ruana
+# Copyright 2014 Rob Ruana
 # Licensed under the BSD License, see LICENSE file for details.
 
-"""Sphinx napoleon extension."""
+"""Sphinx napoleon extension -- support for NumPy and Google style docstrings.
+"""
 
 import sys
 from sphinxcontrib.napoleon.docstring import GoogleDocstring, NumpyDocstring
@@ -38,161 +39,161 @@ class Config(object):
     .. _NumPy style:
        https://github.com/numpy/numpy/blob/master/doc/HOWTO_DOCUMENT.rst.txt
 
-    Attributes
-    ----------
-    napoleon_google_docstring : bool, defaults to True
-        True to parse `Google style`_ docstrings. False to disable support
-        for Google style docstrings.
-    napoleon_numpy_docstring : bool, defaults to True
-        True to parse `NumPy style`_ docstrings. False to disable support
-        for NumPy style docstrings.
-    napoleon_include_private_with_doc : bool, defaults to False
-        True to include private members (like ``_membername``) with docstrings
-        in the documentation. False to fall back to Sphinx's default behavior.
 
-        **If True**::
 
-            def _included(self):
-                \"\"\"
-                This will be included in the docs because it has a docstring
-                \"\"\"
-                pass
+    **napoleon_google_docstring** : bool, defaults to True
+       True to parse `Google style`_ docstrings. False to disable support
+       for Google style docstrings.
 
-            def _skipped(self):
-                # This will NOT be included in the docs
-                pass
+    **napoleon_numpy_docstring** : bool, defaults to True
+       True to parse `NumPy style`_ docstrings. False to disable support
+       for NumPy style docstrings.
 
-    napoleon_include_special_with_doc : bool, defaults to True
-        True to include special members (like ``__membername__``) with
-        docstrings in the documentation. False to fall back to Sphinx's
-        default behavior.
+    **napoleon_include_private_with_doc** : bool, defaults to False
+       True to include private members (like ``_membername``) with docstrings
+       in the documentation. False to fall back to Sphinx's default behavior.
 
-        **If True**::
+       **If True**::
 
-            def __str__(self):
-                \"\"\"
-                This will be included in the docs because it has a docstring
-                \"\"\"
-                return unicode(self).encode('utf-8')
+           def _included(self):
+               \"\"\"
+               This will be included in the docs because it has a docstring
+               \"\"\"
+               pass
 
-            def __unicode__(self):
-                # This will NOT be included in the docs
-                return unicode(self.__class__.__name__)
+           def _skipped(self):
+               # This will NOT be included in the docs
+               pass
 
-    napoleon_use_admonition_for_examples : bool, defaults to False
-        True to use the ``.. admonition::`` directive for the **Example** and
-        **Examples** sections. False to use the ``.. rubric::`` directive
-        instead. One may look better than the other depending on what HTML
-        theme is used.
+    **napoleon_include_special_with_doc** : bool, defaults to True
+       True to include special members (like ``__membername__``) with
+       docstrings in the documentation. False to fall back to Sphinx's
+       default behavior.
 
-        This `NumPy style`_ snippet will be converted as follows::
+       **If True**::
 
-            Example
-            -------
-            This is just a quick example
+           def __str__(self):
+               \"\"\"
+               This will be included in the docs because it has a docstring
+               \"\"\"
+               return unicode(self).encode('utf-8')
 
-        **If True**::
+           def __unicode__(self):
+               # This will NOT be included in the docs
+               return unicode(self.__class__.__name__)
 
-            .. admonition:: Example
+    **napoleon_use_admonition_for_examples** : bool, defaults to False
+       True to use the ``.. admonition::`` directive for the **Example** and
+       **Examples** sections. False to use the ``.. rubric::`` directive
+       instead. One may look better than the other depending on what HTML
+       theme is used.
 
-               This is just a quick example
+       This `NumPy style`_ snippet will be converted as follows::
 
-        **If False**::
+           Example
+           -------
+           This is just a quick example
 
-            .. rubric:: Example
+       **If True**::
 
-            This is just a quick example
+           .. admonition:: Example
 
-    napoleon_use_admonition_for_notes : bool, defaults to False
-        True to use the ``.. admonition::`` directive for **Notes** sections.
-        False to use the ``.. rubric::`` directive instead.
+              This is just a quick example
 
-        Note
-        ----
-        The singular **Note** section will always be converted to a
-        ``.. note::`` directive.
+       **If False**::
 
-        See Also
-        --------
-        :attr:`napoleon_use_admonition_for_examples`
+           .. rubric:: Example
 
-    napoleon_use_admonition_for_references : bool, defaults to False
-        True to use the ``.. admonition::`` directive for **References**
-        sections. False to use the ``.. rubric::`` directive instead.
+           This is just a quick example
 
-        See Also
-        --------
-        :attr:`napoleon_use_admonition_for_examples`
+    **napoleon_use_admonition_for_notes** : bool, defaults to False
+       True to use the ``.. admonition::`` directive for **Notes** sections.
+       False to use the ``.. rubric::`` directive instead.
 
-    napoleon_use_ivar : bool, defaults to False
-        True to use the ``:ivar:`` role for instance variables. False to use
-        the ``.. attribute::`` directive instead.
+       .. note:: The singular **Note** section will always be converted to a
+          ``.. note::`` directive.
 
-        This `NumPy style`_ snippet will be converted as follows::
+       .. seealso::
 
-            Attributes
-            ----------
-            attr1 : int
-                Description of `attr1`
+          :attr:`napoleon_use_admonition_for_examples`
 
-        **If True**::
+    **napoleon_use_admonition_for_references** : bool, defaults to False
+       True to use the ``.. admonition::`` directive for **References**
+       sections. False to use the ``.. rubric::`` directive instead.
 
-            :ivar attr1: Description of `attr1`
-            :vartype attr1: int
+       .. seealso::
 
-        **If False**::
+          :attr:`napoleon_use_admonition_for_examples`
 
-            .. attribute:: attr1
-               :annotation: int
+    **napoleon_use_ivar** : bool, defaults to False
+       True to use the ``:ivar:`` role for instance variables. False to use
+       the ``.. attribute::`` directive instead.
 
+       This `NumPy style`_ snippet will be converted as follows::
+
+           Attributes
+           ----------
+           attr1 : int
                Description of `attr1`
 
-    napoleon_use_param : bool, defaults to False
-        True to use a ``:param:`` role for each function parameter. False to
-        use a single ``:parameters:`` role for all the parameters.
+       **If True**::
 
-        This `NumPy style`_ snippet will be converted as follows::
+           :ivar attr1: Description of `attr1`
+           :vartype attr1: int
 
-            Parameters
-            ----------
-            arg1 : str
-                Description of `arg1`
-            arg2 : int, optional
-                Description of `arg2`, defaults to 0
+       **If False**::
 
-        **If True**::
+           .. attribute:: attr1
+              :annotation: int
 
-            :param arg1: Description of `arg1`
-            :type arg1: str
-            :param arg2: Description of `arg2`, defaults to 0
-            :type arg2: int, optional
+              Description of `attr1`
 
-        **If False**::
+    **napoleon_use_param** : bool, defaults to False
+       True to use a ``:param:`` role for each function parameter. False to
+       use a single ``:parameters:`` role for all the parameters.
 
-            :parameters: * **arg1** (*str*) --
-                           Description of `arg1`
-                         * **arg2** (*int, optional*) --
-                           Description of `arg2`, defaults to 0
+       This `NumPy style`_ snippet will be converted as follows::
 
-    napoleon_use_rtype : bool, defaults to False
-        True to use the ``:rtype:`` role for the return type. False to output
-        the return type inline with the description.
+           Parameters
+           ----------
+           arg1 : str
+               Description of `arg1`
+           arg2 : int, optional
+               Description of `arg2`, defaults to 0
 
-        This `NumPy style`_ snippet will be converted as follows::
+       **If True**::
 
-            Returns
-            -------
-            bool
-                True if successful, False otherwise
+           :param arg1: Description of `arg1`
+           :type arg1: str
+           :param arg2: Description of `arg2`, defaults to 0
+           :type arg2: int, optional
 
-        **If True**::
+       **If False**::
 
-            :returns: True if successful, False otherwise
-            :rtype: bool
+           :parameters: * **arg1** (*str*) --
+                          Description of `arg1`
+                        * **arg2** (*int, optional*) --
+                          Description of `arg2`, defaults to 0
 
-        **If False**::
+    **napoleon_use_rtype** : bool, defaults to False
+       True to use the ``:rtype:`` role for the return type. False to output
+       the return type inline with the description.
 
-            :returns: *bool* -- True if successful, False otherwise
+       This `NumPy style`_ snippet will be converted as follows::
+
+           Returns
+           -------
+           bool
+               True if successful, False otherwise
+
+       **If True**::
+
+           :returns: True if successful, False otherwise
+           :rtype: bool
+
+       **If False**::
+
+           :returns: *bool* -- True if successful, False otherwise
 
     """
     _config_values = {

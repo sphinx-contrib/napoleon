@@ -1,35 +1,46 @@
-napoleon Package
-================
+tests.napoleon package
+======================
 
-:mod:`test_docstring` Module
-----------------------------
+Submodules
+----------
+
+tests.napoleon.test_docstring module
+------------------------------------
 
 .. automodule:: tests.napoleon.test_docstring
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`test_iterators` Module
-----------------------------
+tests.napoleon.test_iterators module
+------------------------------------
 
 .. automodule:: tests.napoleon.test_iterators
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`test_napoleon` Module
----------------------------
+tests.napoleon.test_napoleon module
+-----------------------------------
 
 .. automodule:: tests.napoleon.test_napoleon
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`test_pavertasks` Module
------------------------------
+tests.napoleon.test_pavertasks module
+-------------------------------------
 
 .. automodule:: tests.napoleon.test_pavertasks
     :members:
     :undoc-members:
     :show-inheritance:
 
+
+Module contents
+---------------
+
+.. automodule:: tests.napoleon
+    :members:
+    :undoc-members:
+    :show-inheritance:

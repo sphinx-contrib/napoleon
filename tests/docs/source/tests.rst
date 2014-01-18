@@ -1,4 +1,4 @@
-tests Package
+tests package
 =============
 
 Subpackages
@@ -8,3 +8,10 @@ Subpackages
 
     tests.napoleon
 
+Module contents
+---------------
+
+.. automodule:: tests
+    :members:
+    :undoc-members:
+    :show-inheritance:

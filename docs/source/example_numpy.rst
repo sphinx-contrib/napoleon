@@ -1,11 +1,15 @@
+:orphan:
+
 .. _example_numpy:
 
 Example NumPy Style Python Docstrings
 ======================================
 
-.. seealso:: :ref:`example_google`
+.. seealso::
 
-Download: :download:`example_numpy.py <example_numpy.txt>`
+   :ref:`example_google`
 
-.. literalinclude:: example_numpy.txt
+Download: :download:`example_numpy.py <example_numpy.py>`
+
+.. literalinclude:: example_numpy.py
    :language: python
