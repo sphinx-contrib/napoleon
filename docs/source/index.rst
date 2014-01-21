@@ -3,6 +3,10 @@
 Napoleon - *Marching toward legible docstrings*
 ===============================================
 
+.. note:: As of Sphinx 1.3, the napoleon extension will come packaged with
+   Sphinx under `sphinx.ext.napoleon`. The `sphinxcontrib.napoleon` extension
+   will continue to work with Sphinx <= 1.2.
+
 Are you tired of writing docstrings that look like this::
 
     :param path: The path of the file to wrap
@@ -173,11 +177,13 @@ Configuration
 =============
 
 .. autoclass:: sphinxcontrib.napoleon.Config
+   :noindex:
 
 Index
 =====
 .. toctree::
-   :maxdepth: 1
+
+    sphinxcontrib.napoleon
 
 * :ref:`genindex`
 * :ref:`modindex`
