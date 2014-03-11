@@ -4,7 +4,11 @@
 
 """Tests for :mod:`sphinxcontrib.napoleon.__init__` module."""
 
-from mock import Mock
+try:
+    # Python >=3.3
+    from unittest.mock import Mock
+except ImportError:
+    from mock import Mock
 from sphinx.application import Sphinx
 from sphinxcontrib.napoleon import (_process_docstring, _skip_member, Config,
                                     setup)
@@ -74,8 +78,8 @@ class ProcessDocstringTest(TestCase):
 
         expected = ['Summary line.',
                     '',
-                    ':Parameters: **arg1** --',
-                    '             arg1 description']
+                    ':param arg1: arg1 description',
+                    '']
         self.assertEqual(expected, lines)
 
 
