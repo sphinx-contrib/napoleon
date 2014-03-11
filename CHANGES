@@ -2,6 +2,15 @@
 
 This file describes user-visible changes between the extension versions.
 
+Version 0.2.5 (2014-03-11)
+--------------------------
+
+* Fixes Python 3.3 bug which included private and special members in the docs
+* Fixes bug which failed to render links in function parameter types
+* Adds support for See Also refs written using the NumpyDoc style
+* Uses unittest.mock for Python >= 3.3
+
+
 Version 0.2.4 (2014-01-21)
 --------------------------
 
