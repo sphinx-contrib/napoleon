@@ -2,6 +2,13 @@
 
 This file describes user-visible changes between the extension versions.
 
+Version 0.2.7 (2014-04-19)
+--------------------------
+
+* Fixes import error when processing namedtuples
+* Adds Python 3.4 as a tox environment
+
+
 Version 0.2.6 (2014-03-21)
 --------------------------
 
