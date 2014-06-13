@@ -436,7 +436,11 @@ class GoogleDocstring(object):
             else:
                 lines.append('.. attribute:: ' + _name)
                 if _type:
-                    lines.append('   :annotation: ' + _type)
+                    lines.append('')
+                    if '`' in _type:
+                        lines.append('   %s' % _type)
+                    else:
+                        lines.append('   *%s*' % _type)
                 if _desc:
                     lines.extend([''] + self._indent(_desc, 3))
                 lines.append('')

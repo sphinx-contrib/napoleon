@@ -45,7 +45,8 @@ napoleon_use_admonition_for_references = False
 #     :type attr1: type
 # If False, use Sphinx .. attribute:: directive for instance variables:
 #     .. attribute:: attr1
-#        :annotation: type
+#
+#        *type*
 #
 #        Description of attr1.
 napoleon_use_ivar = False
