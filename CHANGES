@@ -2,6 +2,13 @@
 
 This file describes user-visible changes between the extension versions.
 
+Version 0.2.9 (2015-01-12)
+--------------------------
+
+* Fixes bug which silently omitted *args and **kwargs parameters
+* Fixes bug where ignored parameter if description is empty
+
+
 Version 0.2.8 (2014-06-13)
 --------------------------
 
