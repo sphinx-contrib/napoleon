@@ -17,8 +17,9 @@ if sys.version_info[0] >= 3:
 
 
 _directive_regex = re.compile(r'\.\. \S+::')
-_google_untyped_arg_regex = re.compile(r'\s*(\w+)\s*:\s*(.*)')
-_google_typed_arg_regex = re.compile(r'\s*(\w+)\s*\(\s*(.+?)\s*\)\s*:\s*(.*)')
+_google_untyped_arg_regex = re.compile(r'\s*(\*?\*?\w+)\s*:\s*(.*)')
+_google_typed_arg_regex = re.compile(r'\s*(\*?\*?\w+)\s*\(\s*(.+?)\s*\)\s*:'
+                                     r'\s*(.*)')
 
 
 class GoogleDocstring(object):
@@ -84,6 +85,7 @@ class GoogleDocstring(object):
     <BLANKLINE>
     :returns: Description of return value.
     :rtype: str
+    <BLANKLINE>
 
     """
     def __init__(self, docstring, config=None, app=None, what='', name='',
@@ -223,6 +225,11 @@ class GoogleDocstring(object):
                 _name = match.group(1)
                 _desc = match.group(2)
 
+        if _name[:2] == '**':
+            _name = r'\*\*'+_name[2:]
+        elif _name[:1] == '*':
+            _name = r'\*'+_name[1:]
+
         if prefer_type and not _type:
             _type, _name = _name, _type
         indent = self._get_indent(line) + 1
@@ -299,11 +306,10 @@ class GoogleDocstring(object):
                 padding = ' ' * len(prefix)
             result_lines = []
             for i, line in enumerate(lines):
-                if line:
-                    if i == 0:
-                        result_lines.append(prefix + line)
-                    else:
-                        result_lines.append(padding + line)
+                if i == 0:
+                    result_lines.append((prefix + line).rstrip())
+                elif line:
+                    result_lines.append(padding + line)
                 else:
                     result_lines.append('')
             return result_lines
@@ -672,6 +678,7 @@ class NumpyDocstring(GoogleDocstring):
     <BLANKLINE>
     :returns: Description of return value.
     :rtype: str
+    <BLANKLINE>
 
     Methods
     -------

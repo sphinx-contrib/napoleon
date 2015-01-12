@@ -7,7 +7,7 @@
 import os
 import shutil
 from paver.easy import options
-from sphinxcontrib.napoleon.pavertasks import apidoc, html
+from sphinxcontrib.napoleon.pavertasks import apidoc
 from unittest import TestCase
 
 
@@ -34,8 +34,3 @@ class BasePavertasksTest(TestCase):
 class ApidocTest(BasePavertasksTest):
     def test_apidoc(self):
         apidoc(options)
-
-
-class HtmlTest(BasePavertasksTest):
-    def test_html(self):
-        html(options)
