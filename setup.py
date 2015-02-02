@@ -22,7 +22,7 @@ setup(
     download_url='http://pypi.python.org/pypi/sphinxcontrib-napoleon',
     license='BSD',
     author='Rob Ruana',
-    author_email='rob@relentlessidiot.com',
+    author_email='rob@robruana.com',
     description=__doc__,
     long_description=open('README.rst', 'r').read(),
     zip_safe=False,
