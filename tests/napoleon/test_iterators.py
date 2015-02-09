@@ -10,9 +10,11 @@ from unittest import TestCase
 
 
 if sys.version_info[0] >= 3:
-    u = lambda s: s
+    def u(s):
+        return s
 else:
-    u = lambda s: unicode(s.replace(r'\\', r'\\\\'), "unicode_escape")
+    def u(s):
+        return unicode(s.replace(r'\\', r'\\\\'), "unicode_escape")
 
 
 class BaseIteratorsTest(TestCase):

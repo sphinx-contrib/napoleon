@@ -9,7 +9,8 @@ import sys
 
 
 if sys.version_info[0] >= 3:
-    callable = lambda o: hasattr(o, '__call__')
+    def callable(o):
+        return hasattr(o, '__call__')
 
 
 class peek_iter(object):

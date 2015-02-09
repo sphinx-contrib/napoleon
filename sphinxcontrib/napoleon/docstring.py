@@ -773,6 +773,8 @@ class NumpyDocstring(GoogleDocstring):
         """
         Derived from the NumpyDoc implementation of _parse_see_also.
 
+        See Also
+        --------
         func_name : Descriptive text
             continued text
         another_func_name : Descriptive text
