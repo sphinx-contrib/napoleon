@@ -220,6 +220,33 @@ class GoogleDocstringTest(BaseDocstringTest):
                        Variable length argument list.
                      * **\\*\\*kwargs** --
                        Arbitrary keyword arguments."""
+    ), (
+        """
+        Single line summary
+
+        Yield:
+          str:Extended
+          description of yielded value
+        """,
+        """
+        Single line summary
+
+        :Yields: *str* --
+                 Extended
+                 description of yielded value"""
+    ), (
+        """
+        Single line summary
+
+        Yields:
+          Extended
+          description of yielded value
+        """,
+        """
+        Single line summary
+
+        :Yields: Extended
+                 description of yielded value"""
     )]
 
     def test_docstrings(self):
@@ -422,6 +449,38 @@ class NumpyDocstringTest(BaseDocstringTest):
                        Variable length argument list.
                      * ****kwargs** --
                        Arbitrary keyword arguments."""
+    ), (
+        """
+        Single line summary
+
+        Yield
+        -----
+        str
+            Extended
+            description of yielded value
+        """,
+        """
+        Single line summary
+
+        :Yields: *str* --
+                 Extended
+                 description of yielded value"""
+    ), (
+        """
+        Single line summary
+
+        Yields
+        ------
+        str
+            Extended
+            description of yielded value
+        """,
+        """
+        Single line summary
+
+        :Yields: *str* --
+                 Extended
+                 description of yielded value"""
     )]
 
     def test_docstrings(self):

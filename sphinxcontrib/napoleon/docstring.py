@@ -142,6 +142,7 @@ class GoogleDocstring(object):
                 'warning': self._parse_warning_section,
                 'warnings': self._parse_warning_section,
                 'warns': self._parse_warns_section,
+                'yield': self._parse_yields_section,
                 'yields': self._parse_yields_section,
             }
         self._parse()
@@ -587,7 +588,7 @@ class GoogleDocstring(object):
         return self._format_fields('Warns', self._consume_fields())
 
     def _parse_yields_section(self, section):
-        fields = self._consume_fields(prefer_type=True)
+        fields = self._consume_returns_section()
         return self._format_fields('Yields', fields)
 
     def _strip_empty(self, lines):
