@@ -2,6 +2,12 @@
 
 This file describes user-visible changes between the extension versions.
 
+Version 0.2.10 (2015-02-09)
+---------------------------
+
+* Adds "Yield" alias for "Yields" section
+
+
 Version 0.2.9 (2015-01-12)
 --------------------------
 
