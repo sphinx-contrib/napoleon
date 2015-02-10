@@ -4,11 +4,17 @@
 
 """Sphinx "napoleon" extension."""
 
+import os
 import sys
 from setuptools import setup, find_packages
 
 reqs = open('requirements.txt', 'r').read().strip().splitlines()
 reqs_test = open('requirements_test.txt', 'r').read().strip().splitlines()
+
+version_path = os.path.join('sphinxcontrib',
+                            'napoleon',
+                            '_version.py')
+exec(open(version_path).read())
 
 extra = {}
 if sys.version_info[0] >= 3:
@@ -17,8 +23,8 @@ if sys.version_info[0] >= 3:
 
 setup(
     name='sphinxcontrib-napoleon',
-    version='0.2.10',
-    url='https://bitbucket.org/birkenfeld/sphinx-contrib',
+    version=__version__,
+    url='http://sphinxcontrib-napoleon.readthedocs.org',
     download_url='http://pypi.python.org/pypi/sphinxcontrib-napoleon',
     license='BSD',
     author='Rob Ruana',
@@ -27,7 +33,7 @@ setup(
     long_description=open('README.rst', 'r').read(),
     zip_safe=False,
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
@@ -38,6 +44,8 @@ setup(
         'Programming Language :: Python :: 3',
         'Topic :: Documentation',
         'Topic :: Utilities',
+        'Framework :: Sphinx',
+        'Framework :: Sphinx :: Extension',
     ],
     platforms='any',
     packages=find_packages(),

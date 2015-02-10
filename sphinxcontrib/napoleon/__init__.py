@@ -7,6 +7,8 @@
 
 import sys
 from sphinxcontrib.napoleon.docstring import GoogleDocstring, NumpyDocstring
+from sphinxcontrib.napoleon._version import __version__
+assert __version__  # silence pyflakes
 
 
 class Config(object):
