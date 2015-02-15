@@ -190,6 +190,8 @@ Index
 
     sphinxcontrib.napoleon
 
+* :ref:`example_google`
+* :ref:`example_numpy`
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
