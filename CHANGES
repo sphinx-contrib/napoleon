@@ -2,6 +2,13 @@
 
 This file describes user-visible changes between the extension versions.
 
+Version 0.2.11 (2015-02-15)
+---------------------------
+
+* Fix Google Docstring argument regex. Argument types now more permissive,
+  allowing spaces and other special characters.
+
+
 Version 0.2.10 (2015-02-09)
 ---------------------------
 
