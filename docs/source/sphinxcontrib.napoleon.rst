@@ -1,9 +1,6 @@
 sphinxcontrib.napoleon package
 ==============================
 
-Submodules
-----------
-
 sphinxcontrib.napoleon.docstring module
 ---------------------------------------
 
