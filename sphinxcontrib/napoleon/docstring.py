@@ -8,12 +8,10 @@ import collections
 import inspect
 import re
 import sys
-from sphinxcontrib.napoleon.iterators import modify_iter
 
-
-if sys.version_info[0] >= 3:
-    basestring = str
-    xrange = range
+from pockets import modify_iter
+from six import string_types
+from six.moves import xrange
 
 
 _directive_regex = re.compile(r'\.\. \S+::')
@@ -110,7 +108,7 @@ class GoogleDocstring(object):
         self._name = name
         self._obj = obj
         self._opt = options
-        if isinstance(docstring, basestring):
+        if isinstance(docstring, string_types):
             docstring = docstring.splitlines()
         self._lines = docstring
         self._line_iter = modify_iter(docstring, modifier=lambda s: s.rstrip())
@@ -749,7 +747,7 @@ class NumpyDocstring(GoogleDocstring):
     def _is_section_header(self):
         section, underline = self._line_iter.peek(2)
         section = section.lower()
-        if section in self._sections and isinstance(underline, basestring):
+        if section in self._sections and isinstance(underline, string_types):
             pattern = r'[=\-`:\'"~^_*+#<>]{' + str(len(section)) + r'}$'
             return bool(re.match(pattern, underline))
         elif self._directive_sections:

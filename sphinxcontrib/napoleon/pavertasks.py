@@ -72,8 +72,8 @@ html
 """
 
 import os
-import sys
 from paver.easy import BuildFailure, needs, task
+from six import string_types
 
 
 try:
@@ -82,10 +82,6 @@ try:
     has_sphinx = True
 except ImportError:
     has_sphinx = False
-
-
-if sys.version_info[0] >= 3:
-    basestring = str
 
 
 @task
@@ -107,7 +103,7 @@ def apidoc(options):
         raise BuildFailure('Module dir (%s) does not exist' % moduledir)
 
     excludes = options.get('apidoc_excludes', [])
-    if isinstance(excludes, basestring):
+    if isinstance(excludes, string_types):
         excludes = [excludes]
 
     if options.get('apidoc_overwrite', True):

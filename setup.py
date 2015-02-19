@@ -11,9 +11,9 @@ from setuptools import setup, find_packages
 reqs = open('requirements.txt', 'r').read().strip().splitlines()
 reqs_test = open('requirements_test.txt', 'r').read().strip().splitlines()
 
-version_path = os.path.join('sphinxcontrib',
-                            'napoleon',
-                            '_version.py')
+# Package versioning solution originally found here:
+# http://stackoverflow.com/q/458550
+version_path = os.path.join('sphinxcontrib', 'napoleon', '_version.py')
 exec(open(version_path).read())
 
 extra = {}

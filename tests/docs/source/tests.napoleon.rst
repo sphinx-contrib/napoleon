@@ -12,14 +12,6 @@ tests.napoleon.test_docstring module
     :undoc-members:
     :show-inheritance:
 
-tests.napoleon.test_iterators module
-------------------------------------
-
-.. automodule:: tests.napoleon.test_iterators
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 tests.napoleon.test_napoleon module
 -----------------------------------
 
