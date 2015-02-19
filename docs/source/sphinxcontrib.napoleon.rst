@@ -14,12 +14,3 @@ sphinxcontrib.napoleon.docstring module
     :members:
     :undoc-members:
     :show-inheritance:
-
-
-sphinxcontrib.napoleon.pavertasks module
-----------------------------------------
-
-.. automodule:: sphinxcontrib.napoleon.pavertasks
-    :members:
-    :undoc-members:
-    :show-inheritance:

@@ -2,6 +2,16 @@
 
 This file describes user-visible changes between the extension versions.
 
+
+UNRELEASED
+----------
+
+* Adds six dependency
+* Adds pockets dependency
+* Removes iterators module (now found in pockets package)
+* Removes pavertasks module, deemed redundant as it simply called sphinx-apidoc
+
+
 Version 0.2.11 (2015-02-15)
 ---------------------------
 

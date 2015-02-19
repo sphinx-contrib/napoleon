@@ -20,14 +20,6 @@ tests.napoleon.test_napoleon module
     :undoc-members:
     :show-inheritance:
 
-tests.napoleon.test_pavertasks module
--------------------------------------
-
-.. automodule:: tests.napoleon.test_pavertasks
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 
 Module contents
 ---------------

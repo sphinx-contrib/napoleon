@@ -4,6 +4,5 @@ coverage>=3.6
 flake8>=2.0
 mock>=1.0.1
 nose>=1.3.0
-paver>=1.2.0
 docutils>=0.10
 Sphinx>=1.2b1
