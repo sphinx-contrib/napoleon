@@ -16,11 +16,6 @@ reqs_test = open('requirements_test.txt', 'r').read().strip().splitlines()
 version_path = os.path.join('sphinxcontrib', 'napoleon', '_version.py')
 exec(open(version_path).read())
 
-extra = {}
-if sys.version_info[0] >= 3:
-    extra['use_2to3'] = True
-    extra['use_2to3_on_doctests'] = True
-
 setup(
     name='sphinxcontrib-napoleon',
     version=__version__,
@@ -53,6 +48,5 @@ setup(
     install_requires=reqs,
     test_suite='nose.collector',
     tests_require=reqs_test,
-    namespace_packages=['sphinxcontrib'],
-    **extra
+    namespace_packages=['sphinxcontrib']
 )

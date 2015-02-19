@@ -6,6 +6,8 @@
 """
 
 import sys
+
+from six import iteritems
 from sphinxcontrib.napoleon.docstring import GoogleDocstring, NumpyDocstring
 from sphinxcontrib.napoleon._version import __version__
 assert __version__  # silence pyflakes
@@ -213,9 +215,9 @@ class Config(object):
     }
 
     def __init__(self, **settings):
-        for name, (default, rebuild) in self._config_values.iteritems():
+        for name, (default, rebuild) in iteritems(self._config_values):
             setattr(self, name, default)
-        for name, value in settings.iteritems():
+        for name, value in iteritems(settings):
             setattr(self, name, value)
 
 
@@ -248,7 +250,7 @@ def setup(app):
     app.connect('autodoc-process-docstring', _process_docstring)
     app.connect('autodoc-skip-member', _skip_member)
 
-    for name, (default, rebuild) in Config._config_values.iteritems():
+    for name, (default, rebuild) in iteritems(Config._config_values):
         app.add_config_value(name, default, rebuild)
 
 

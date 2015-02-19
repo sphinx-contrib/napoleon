@@ -3,6 +3,12 @@
 This file describes user-visible changes between the extension versions.
 
 
+UNRELEASED
+----------
+
+ * Removes 2to3 from setup.py
+
+
 Version 0.3 (2015-02-19)
 ------------------------
 
