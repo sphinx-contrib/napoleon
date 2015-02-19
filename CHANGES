@@ -3,8 +3,8 @@
 This file describes user-visible changes between the extension versions.
 
 
-UNRELEASED
-----------
+Version 0.3 (2015-02-19)
+------------------------
 
 * Adds six dependency
 * Adds pockets dependency
