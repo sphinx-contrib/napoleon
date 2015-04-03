@@ -586,3 +586,26 @@ numpy.multivariate_normal(mean, cov, shape=None, spam=None)
        relationship
 """
         self.assertEqual(expected, actual)
+
+    def test_colon_in_return_type(self):
+        docstring = """
+Summary
+
+Returns
+-------
+:py:class:`~my_mod.my_class`
+    an instance of :py:class:`~my_mod.my_class`
+"""
+
+        expected = """
+Summary
+
+:returns: an instance of :py:class:`~my_mod.my_class`
+:rtype: :py:class:`~my_mod.my_class`
+"""
+
+        config = Config()
+        app = Mock()
+        actual = str(NumpyDocstring(docstring, config, app, "method"))
+
+        self.assertEqual(expected, actual)
