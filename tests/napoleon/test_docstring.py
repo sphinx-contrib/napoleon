@@ -627,3 +627,23 @@ Summary
         actual = str(NumpyDocstring(docstring, config, app, "method"))
 
         self.assertEqual(expected, actual)
+
+    def test_underscore_in_attribute(self):
+        docstring = """
+Attributes
+----------
+
+arg_ : type
+    some description
+"""
+
+        expected = """
+:ivar arg_: some description
+:vartype arg_: type
+"""
+
+        config = Config(napoleon_use_ivar=True)
+        app = Mock()
+        actual = str(NumpyDocstring(docstring, config, app, "class"))
+
+        self.assertEqual(expected, actual)
