@@ -324,6 +324,24 @@ Attributes:
 """
         self.assertEqual(expected, actual)
 
+    def test_code_block_in_returns_section(self):
+        docstring = """
+Returns:
+    foobar: foo::
+
+        codecode
+        codecode
+"""
+        expected = """
+:returns: foo::
+
+              codecode
+              codecode
+:rtype: foobar
+"""
+        actual = str(GoogleDocstring(docstring))
+        self.assertEqual(expected, actual)
+
 
 class NumpyDocstringTest(BaseDocstringTest):
     docstrings = [(
