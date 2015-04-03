@@ -3,6 +3,12 @@
 This file describes user-visible changes between the extension versions.
 
 
+Version 0.3.2 (2015-04-03)
+--------------------------
+
+* Correctly handles Return types containing colons in NumPy-style docstrings
+
+
 Version 0.3.1 (2015-02-19)
 --------------------------
 
