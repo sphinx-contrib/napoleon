@@ -3,6 +3,13 @@
 This file describes user-visible changes between the extension versions.
 
 
+Version 0.3.6 (2015-05-27)
+--------------------------
+
+* Removes docutils inline parser because it is incompatible with more recent
+  versions of docutils.
+
+
 Version 0.3.5 (2015-05-27)
 --------------------------
 
