@@ -3,6 +3,12 @@
 This file describes user-visible changes between the extension versions.
 
 
+Version 0.3.5 (2015-05-27)
+--------------------------
+
+* Uses docutils to parse inline markup in params, attributes, return types...
+
+
 Version 0.3.4 (2015-05-03)
 --------------------------
 
