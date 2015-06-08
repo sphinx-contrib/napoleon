@@ -23,7 +23,7 @@ Notes
     This is an example of an indented section. It's like any other section,
     but the body is indented to help it stand out from surrounding text.
 
-If a section is indented, then a section break is created simply by
+If a section is indented, then a section break is created by
 resuming unindented text.
 
 Attributes
@@ -52,8 +52,10 @@ def module_level_function(param1, param2=None, *args, **kwargs):
     The name of each parameter is required. The type and description of each
     parameter is optional, but should be included if not obvious.
 
-    If the parameter itself is optional, it should be noted by adding
-    ", optional" to the type. If \*args or \*\*kwargs are accepted, they
+    Types should be specified according to `PEP 484`_, though `PEP 484`_
+    conformance isn't required or enforced.
+
+    If \*args or \*\*kwargs are accepted, they
     should be listed as \*args and \*\*kwargs.
 
     The format for a parameter is::
@@ -71,8 +73,8 @@ def module_level_function(param1, param2=None, *args, **kwargs):
     ----------
     param1 : int
         The first parameter.
-    param2 : str, optional
-        The second parameter, defaults to None.
+    param2 : Optional[str]
+        The second parameter.
     *args
         Variable length argument list.
     **kwargs
@@ -102,6 +104,10 @@ def module_level_function(param1, param2=None, *args, **kwargs):
         that are relevant to the interface.
     ValueError
         If `param2` is equal to `param1`.
+
+
+    .. _PEP 484:
+       https://www.python.org/dev/peps/pep-0484/
 
     """
     if param1 == param2:
@@ -152,18 +158,18 @@ class ExampleError(Exception):
     ----------
     msg : str
         Human readable string describing the exception.
-    code : int, optional
-        Error code, defaults to 2.
+    code : Optional[int]
+        Numeric error code.
 
     Attributes
     ----------
     msg : str
         Human readable string describing the exception.
     code : int
-        Exception error code.
+        Numeric error code.
 
     """
-    def __init__(self, msg, code=2):
+    def __init__(self, msg, code):
         self.msg = msg
         self.code = code
 
@@ -175,17 +181,24 @@ class ExampleClass(object):
     in an ``Attributes`` section and follow the same formatting as a
     function's ``Parameters`` section.
 
+    Types should be specified according to `PEP 484`_, though `PEP 484`_
+    conformance isn't required or enforced.
+
     Attributes
     ----------
     attr1 : str
         Description of `attr1`.
-    attr2 : list of str
+    attr2 : List[str]
         Description of `attr2`.
-    attr3 : int
+    attr3 : Optional[int]
         Description of `attr3`.
 
+
+    .. _PEP 484:
+       https://www.python.org/dev/peps/pep-0484/
+
     """
-    def __init__(self, param1, param2, param3=0):
+    def __init__(self, param1, param2, param3):
         """Example of docstring on the __init__ method.
 
         The __init__ method may be documented in either the class level
@@ -202,11 +215,11 @@ class ExampleClass(object):
         ----------
         param1 : str
             Description of `param1`.
-        param2 : list of str
+        param2 : List[str]
             Description of `param2`. Multiple
             lines are supported.
-        param3 : int, optional
-            Description of `param3`, defaults to 0.
+        param3 : Optional[int]
+            Description of `param3`.
 
         """
         self.attr1 = param1

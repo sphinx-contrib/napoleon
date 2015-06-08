@@ -12,7 +12,7 @@ Example:
 
       $ python example_google.py
 
-Section breaks are created by simply resuming unindented text. Section breaks
+Section breaks are created by resuming unindented text. Section breaks
 are also implicitly created anytime a new section starts.
 
 Attributes:
@@ -25,7 +25,7 @@ Attributes:
     with it.
 
 .. _Google Python Style Guide:
-   http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
+   http://google.github.io/styleguide/pyguide.html
 
 """
 
@@ -39,9 +39,11 @@ def module_level_function(param1, param2=None, *args, **kwargs):
     of each parameter is required. The type and description of each parameter
     is optional, but should be included if not obvious.
 
-    If the parameter itself is optional, it should be noted by adding
-    ", optional" to the type. If \*args or \*\*kwargs are accepted, they
-    should be listed as \*args and \*\*kwargs.
+    Types should be specified according to `PEP 484`_, though `PEP 484`_
+    conformance isn't required or enforced.
+
+    If \*args or \*\*kwargs are accepted,
+    they should be listed as \*args and \*\*kwargs.
 
     The format for a parameter is::
 
@@ -54,7 +56,7 @@ def module_level_function(param1, param2=None, *args, **kwargs):
 
     Args:
       param1 (int): The first parameter.
-      param2 (str, optional): The second parameter. Defaults to None.
+      param2 (Optional[str]): The second parameter. Defaults to None.
         Second line of description should be indented.
       *args: Variable length argument list.
       **kwargs: Arbitrary keyword arguments.
@@ -80,6 +82,9 @@ def module_level_function(param1, param2=None, *args, **kwargs):
       AttributeError: The ``Raises`` section is a list of all exceptions
         that are relevant to the interface.
       ValueError: If `param2` is equal to `param1`.
+
+    .. _PEP 484:
+       https://www.python.org/dev/peps/pep-0484/
 
     """
     if param1 == param2:
@@ -122,14 +127,14 @@ class ExampleError(Exception):
 
     Args:
       msg (str): Human readable string describing the exception.
-      code (int, optional): Error code, defaults to 2.
+      code (Optional[int]): Error code.
 
     Attributes:
       msg (str): Human readable string describing the exception.
       code (int): Exception error code.
 
     """
-    def __init__(self, msg, code=2):
+    def __init__(self, msg, code):
         self.msg = msg
         self.code = code
 
@@ -141,13 +146,19 @@ class ExampleClass(object):
     in an ``Attributes`` section and follow the same formatting as a
     function's ``Args`` section.
 
+    Types should be specified according to `PEP 484`_, though `PEP 484`_
+    conformance isn't required or enforced.
+
     Attributes:
       attr1 (str): Description of `attr1`.
-      attr2 (list of str): Description of `attr2`.
-      attr3 (int): Description of `attr3`.
+      attr2 (List[str]): Description of `attr2`.
+      attr3 (Optional[int]): Description of `attr3`.
+
+    .. _PEP 484:
+       https://www.python.org/dev/peps/pep-0484/
 
     """
-    def __init__(self, param1, param2, param3=0):
+    def __init__(self, param1, param2, param3):
         """Example of docstring on the __init__ method.
 
         The __init__ method may be documented in either the class level
@@ -161,9 +172,9 @@ class ExampleClass(object):
 
         Args:
           param1 (str): Description of `param1`.
-          param2 (list of str): Description of `param2`. Multiple
+          param2 (List[str]): Description of `param2`. Multiple
             lines are supported.
-          param3 (int, optional): Description of `param3`, defaults to 0.
+          param3 (Optional[int]): Description of `param3`.
 
         """
         self.attr1 = param1

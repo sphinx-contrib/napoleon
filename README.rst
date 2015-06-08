@@ -44,10 +44,10 @@ source code files.
 .. _ReStructuredText: http://docutils.sourceforge.net/rst.html
 .. _docstrings: http://www.python.org/dev/peps/pep-0287/
 .. _Google Python Style Guide:
-   http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
+   http://google.github.io/styleguide/pyguide.html
 .. _Sphinx extension: http://sphinx-doc.org/extensions.html
 .. _Google:
-   http://google-styleguide.googlecode.com/svn/trunk/pyguide.html#Comments
+   http://google.github.io/styleguide/pyguide.html#Comments
 .. _NumPy:
    https://github.com/numpy/numpy/blob/master/doc/HOWTO_DOCUMENT.rst.txt
 .. _Khan Academy:
@@ -111,6 +111,7 @@ All of the following section headers are supported:
     * ``Warning``
     * ``Warnings`` *(alias of Warning)*
     * ``Warns``
+    * ``Yield`` *(alias of Yields)*
     * ``Yields``
 
 Google vs NumPy

@@ -26,10 +26,10 @@ class GoogleDocstring(object):
 
     Parameters
     ----------
-    docstring : str or list of str
+    docstring : str or List[str]
         The docstring to parse, given either as a string or split into
         individual lines.
-    config : sphinxcontrib.napoleon.Config or sphinx.config.Config, optional
+    config : Optional[sphinxcontrib.napoleon.Config or sphinx.config.Config]
         The configuration settings to use. If not given, defaults to the
         config object on `app`; or if `app` is not given defaults to the
         a new `sphinxcontrib.napoleon.Config` object.
@@ -40,17 +40,17 @@ class GoogleDocstring(object):
 
     Other Parameters
     ----------------
-    app : sphinx.application.Sphinx, optional
+    app : Optional[sphinx.application.Sphinx]
         Application object representing the Sphinx process.
-    what : str, optional
+    what : Optional[str]
         A string specifying the type of the object to which the docstring
         belongs. Valid values: "module", "class", "exception", "function",
         "method", "attribute".
-    name : str, optional
+    name : Optional[str]
         The fully qualified name of the object.
     obj : module, class, exception, function, method, or attribute
         The object to which the docstring belongs.
-    options : sphinx.ext.autodoc.Options, optional
+    options : Optional[sphinx.ext.autodoc.Options]
         The options given to the directive: an object with attributes
         inherited_members, undoc_members, show_inheritance and noindex that
         are True if the flag option of same name was given to the auto
@@ -174,7 +174,7 @@ class GoogleDocstring(object):
 
         Returns
         -------
-        list of str
+        List[str]
             The lines of the docstring in a list.
 
         """
@@ -642,10 +642,10 @@ class NumpyDocstring(GoogleDocstring):
 
     Parameters
     ----------
-    docstring : str or list of str
+    docstring : str or List[str]
         The docstring to parse, given either as a string or split into
         individual lines.
-    config : sphinxcontrib.napoleon.Config or sphinx.config.Config, optional
+    config : Optional[sphinxcontrib.napoleon.Config or sphinx.config.Config]
         The configuration settings to use. If not given, defaults to the
         config object on `app`; or if `app` is not given defaults to the
         a new `sphinxcontrib.napoleon.Config` object.
@@ -656,17 +656,17 @@ class NumpyDocstring(GoogleDocstring):
 
     Other Parameters
     ----------------
-    app : sphinx.application.Sphinx, optional
+    app : Optional[sphinx.application.Sphinx]
         Application object representing the Sphinx process.
-    what : str, optional
+    what : Optional[str]
         A string specifying the type of the object to which the docstring
         belongs. Valid values: "module", "class", "exception", "function",
         "method", "attribute".
-    name : str, optional
+    name : Optional[str]
         The fully qualified name of the object.
     obj : module, class, exception, function, method, or attribute
         The object to which the docstring belongs.
-    options : sphinx.ext.autodoc.Options, optional
+    options : Optional[sphinx.ext.autodoc.Options]
         The options given to the directive: an object with attributes
         inherited_members, undoc_members, show_inheritance and noindex that
         are True if the flag option of same name was given to the auto
@@ -728,7 +728,7 @@ class NumpyDocstring(GoogleDocstring):
 
         Returns
         -------
-        list of str
+        List[str]
             The lines of the docstring in a list.
 
     """

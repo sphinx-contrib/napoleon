@@ -28,7 +28,7 @@ else:
 # -- Options for Napoleon Extension --------------------------------------------
 
 # Parse Google style docstrings.
-# See http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
+# See http://google.github.io/styleguide/pyguide.html
 napoleon_google_docstring = True
 
 # Parse NumPy style docstrings.
