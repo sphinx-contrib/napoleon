@@ -235,7 +235,8 @@ def setup(app):
 
     See Also
     --------
-    `The Sphinx documentation on Extensions <http://sphinx-doc.org/extensions.html>`_
+    `The Sphinx documentation on Extensions
+    <http://sphinx-doc.org/extensions.html>`_
 
     `The Extension Tutorial <http://sphinx-doc.org/extdev/tutorial.html>`_
 

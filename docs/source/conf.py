@@ -22,8 +22,7 @@ on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 if on_rtd:
     html_theme = 'default'
 else:
-    html_theme = 'armstrong'
-    html_theme_path = ['_themes']
+    html_theme = 'alabaster'
 
 # -- Options for Napoleon Extension --------------------------------------------
 
