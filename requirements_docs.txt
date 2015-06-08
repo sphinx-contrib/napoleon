@@ -1,2 +1,2 @@
 docutils>=0.10
-Sphinx>=1.2b1,<1.3b
+Sphinx==1.2.3
