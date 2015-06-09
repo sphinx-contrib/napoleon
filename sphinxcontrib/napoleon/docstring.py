@@ -20,9 +20,7 @@ _xref_regex = re.compile(r'(:\w+:\S+:`.+?`|:\S+:`.+?`|`.+?`)')
 
 
 class GoogleDocstring(object):
-    """Parse Google style docstrings.
-
-    Convert Google style docstrings to reStructuredText.
+    """Convert Google style docstrings to reStructuredText.
 
     Parameters
     ----------
@@ -238,6 +236,15 @@ class GoogleDocstring(object):
                 fields.append((_name, _type, _desc,))
         return fields
 
+    def _consume_inline_attribute(self):
+        line = next(self._line_iter)
+        _type, colon, _desc = self._partition_field_on_colon(line)
+        if not colon:
+            _type, _desc = _desc, _type
+        _desc = [_desc] + self._dedent(self._consume_to_end())
+        _desc = self.__class__(_desc, self._config).lines()
+        return _type, _desc
+
     def _consume_returns_section(self):
         lines = self._dedent(self._consume_to_next_section())
         if lines:
@@ -272,6 +279,12 @@ class GoogleDocstring(object):
         if stripped_section.lower() in self._sections:
             section = stripped_section
         return section
+
+    def _consume_to_end(self):
+        lines = []
+        while self._line_iter.has_next():
+            lines.append(next(self._line_iter))
+        return lines
 
     def _consume_to_next_section(self):
         self._consume_empty()
@@ -314,7 +327,7 @@ class GoogleDocstring(object):
             return [prefix]
 
     def _format_field(self, _name, _type, _desc):
-        separator = any([s for s in _desc]) and ' --' or ''
+        separator = (_desc and _desc[0]) and ' --' or ''
         if _name:
             if _type:
                 if '`' in _type:
@@ -408,6 +421,11 @@ class GoogleDocstring(object):
 
     def _parse(self):
         self._parsed_lines = self._consume_empty()
+
+        if self._name and (self._what == 'attribute' or self._what == 'data'):
+            self._parsed_lines.extend(self._parse_attribute_docstring())
+            return
+
         while self._line_iter.has_next():
             if self._is_section_header():
                 try:
@@ -428,6 +446,10 @@ class GoogleDocstring(object):
                     lines = self._consume_to_next_section()
             self._parsed_lines.extend(lines)
 
+    def _parse_attribute_docstring(self):
+        _type, _desc = self._consume_inline_attribute()
+        return self._format_field('', _type, _desc)
+
     def _parse_attributes_section(self, section):
         lines = []
         for _name, _type, _desc in self._consume_fields():
@@ -437,15 +459,9 @@ class GoogleDocstring(object):
                 if _type:
                     lines.append(':vartype %s: %s' % (_name, _type))
             else:
-                lines.append('.. attribute:: ' + _name)
-                if _type:
-                    lines.append('')
-                    if '`' in _type:
-                        lines.append('   %s' % _type)
-                    else:
-                        lines.append('   *%s*' % _type)
-                if _desc:
-                    lines.extend([''] + self._indent(_desc, 3))
+                lines.extend(['.. attribute:: ' + _name, ''])
+                field = self._format_field('', _type, _desc)
+                lines.extend(self._indent(field, 3))
                 lines.append('')
         if self._config.napoleon_use_ivar:
             lines.append('')
@@ -636,9 +652,7 @@ class GoogleDocstring(object):
 
 
 class NumpyDocstring(GoogleDocstring):
-    """Parse NumPy style docstrings.
-
-    Convert NumPy style docstrings to reStructuredText.
+    """Convert NumPy style docstrings to reStructuredText.
 
     Parameters
     ----------
