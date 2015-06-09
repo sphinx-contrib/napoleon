@@ -3,6 +3,35 @@
 This file describes user-visible changes between the extension versions.
 
 
+Version 0.3.7 (2015-06-09)
+--------------------------
+
+* Adds explicit type parsing for inline attribute and @property docs.
+* Attribute types are no longer rendered on a separate line if the source
+  docstring did not use a newline after the type::
+
+    attr (type): description
+
+  renders as::
+
+    .. attribute:: attr
+
+       *type* -- description
+
+  whereas::
+
+    attr (type):
+        description
+
+  renders as::
+
+    .. attribute:: attr
+
+       *type*
+
+       description
+
+
 Version 0.3.6 (2015-05-27)
 --------------------------
 
@@ -37,8 +66,8 @@ Version 0.3.2 (2015-04-03)
 Version 0.3.1 (2015-02-19)
 --------------------------
 
- * Removes 2to3 from setup.py
- * Enables bdist_wheel distributions
+* Removes 2to3 from setup.py
+* Enables bdist_wheel distributions
 
 
 Version 0.3 (2015-02-19)
