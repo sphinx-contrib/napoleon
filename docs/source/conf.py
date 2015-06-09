@@ -21,8 +21,6 @@ sys.path.insert(0, basedir)
 on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 if on_rtd:
     html_theme = 'default'
-else:
-    html_theme = 'alabaster'
 
 # -- Options for Napoleon Extension --------------------------------------------
 
