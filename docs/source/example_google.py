@@ -191,7 +191,7 @@ class ExampleClass(object):
         """
         self.attr1 = param1
         self.attr2 = param2
-        self.attr3 = param3 #: Doc comment *inline* with attribute
+        self.attr3 = param3  #: Doc comment *inline* with attribute
 
         #: List[str]: Doc comment *before* attribute, with type specified
         self.attr4 = ["attr4"]
