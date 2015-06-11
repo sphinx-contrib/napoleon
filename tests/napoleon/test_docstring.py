@@ -15,9 +15,9 @@ from unittest import TestCase
 
 try:
     # Python >=3.3
-    from unittest.mock import Mock
+    from unittest import mock
 except ImportError:
-    from mock import Mock
+    import mock
 
 
 class NamedtupleSubclass(namedtuple('NamedtupleSubclass', ('attr1', 'attr2'))):
@@ -802,7 +802,7 @@ otherfunc : relationship
 """
 
         config = Config()
-        app = Mock()
+        app = mock.Mock()
         actual = str(NumpyDocstring(docstring, config, app, "method"))
 
         expected = """\
@@ -835,7 +835,7 @@ Summary
 """
 
         config = Config()
-        app = Mock()
+        app = mock.Mock()
         actual = str(NumpyDocstring(docstring, config, app, "method"))
 
         self.assertEqual(expected, actual)
@@ -855,7 +855,7 @@ arg_ : type
 """
 
         config = Config(napoleon_use_ivar=True)
-        app = Mock()
+        app = mock.Mock()
         actual = str(NumpyDocstring(docstring, config, app, "class"))
 
         self.assertEqual(expected, actual)
@@ -1041,7 +1041,7 @@ Example Function
 """)]
         for docstring, expected in docstrings:
             config = Config()
-            app = Mock()
+            app = mock.Mock()
             actual = str(NumpyDocstring(docstring, config, app, "method"))
             self.assertEqual(expected, actual)
 
@@ -1063,6 +1063,6 @@ Example Function
 :rtype: :class:`numpy.ndarray`
 """
         config = Config()
-        app = Mock()
+        app = mock.Mock()
         actual = str(NumpyDocstring(docstring, config, app, "method"))
         self.assertEqual(expected, actual)

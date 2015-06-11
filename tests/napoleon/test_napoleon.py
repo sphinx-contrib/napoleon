@@ -6,9 +6,9 @@
 
 try:
     # Python >=3.3
-    from unittest.mock import Mock
+    from unittest import mock
 except ImportError:
-    from mock import Mock
+    import mock
 from collections import namedtuple
 from sphinx.application import Sphinx
 from sphinxcontrib.napoleon import (_process_docstring, _skip_member, Config,
@@ -74,10 +74,10 @@ class ProcessDocstringTest(TestCase):
                  '',
                  'Args:',
                  '   arg1: arg1 description']
-        app = Mock()
+        app = mock.Mock()
         app.config = Config()
-        _process_docstring(app, 'class', 'SampleClass', SampleClass, Mock(),
-                           lines)
+        _process_docstring(app, 'class', 'SampleClass', SampleClass,
+                           mock.Mock(), lines)
 
         expected = ['Summary line.',
                     '',
@@ -91,7 +91,7 @@ class SetupTest(TestCase):
         setup(object())
 
     def test_add_config_values(self):
-        app = Mock(Sphinx)
+        app = mock.Mock(Sphinx)
         setup(app)
         for name, (default, rebuild) in Config._config_values.items():
             has_config = False
@@ -121,18 +121,18 @@ class SetupTest(TestCase):
 class SkipMemberTest(TestCase):
     def assertSkip(self, what, member, obj, expect_skip, config_name):
         skip = 'default skip'
-        app = Mock()
+        app = mock.Mock()
         app.config = Config()
         setattr(app.config, config_name, True)
         if expect_skip:
             self.assertEqual(skip, _skip_member(app, what, member, obj, skip,
-                                                Mock()))
+                                                mock.Mock()))
         else:
             self.assertFalse(_skip_member(app, what, member, obj, skip,
-                                          Mock()))
+                                          mock.Mock()))
         setattr(app.config, config_name, False)
         self.assertEqual(skip, _skip_member(app, what, member, obj, skip,
-                                            Mock()))
+                                            mock.Mock()))
 
     def test_namedtuple(self):
         self.assertSkip('class', '_asdict',
