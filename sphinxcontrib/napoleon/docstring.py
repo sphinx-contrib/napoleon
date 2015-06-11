@@ -535,7 +535,7 @@ class GoogleDocstring(object):
         lines = []
         for _, _type, _desc in fields:
             has_desc = any(_desc)
-            sep = has_desc and ' -- ' or ''
+            sep = (_desc and _desc[0]) and ' -- ' or ''
             if _type:
                 has_refs = '`' in _type or ':' in _type
                 has_space = any(c in ' \t\n\v\f ' for c in _type)

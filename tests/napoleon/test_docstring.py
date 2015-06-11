@@ -384,6 +384,26 @@ Returns:
 Example Function
 
 Raises:
+    RuntimeError:
+        A setting wasn't specified, or was invalid.
+    ValueError:
+        Something something value error.
+
+""", """
+Example Function
+
+:raises: * :exc:`RuntimeError`
+
+           A setting wasn't specified, or was invalid.
+         * :exc:`ValueError`
+
+           Something something value error.
+"""),
+                      ################################
+                      ("""
+Example Function
+
+Raises:
     InvalidDimensionsError
 
 """, """
@@ -867,6 +887,29 @@ arg_ : type
 
     def test_raises_types(self):
         docstrings = [("""
+Example Function
+
+Raises
+------
+  RuntimeError
+
+      A setting wasn't specified, or was invalid.
+  ValueError
+
+      Something something value error.
+
+""", """
+Example Function
+
+:raises: * :exc:`RuntimeError`
+
+           A setting wasn't specified, or was invalid.
+         * :exc:`ValueError`
+
+           Something something value error.
+"""),
+                      ################################
+                      ("""
 Example Function
 
 Raises
