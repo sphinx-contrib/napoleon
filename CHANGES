@@ -3,6 +3,32 @@
 This file describes user-visible changes between the extension versions.
 
 
+Version 0.3.10 (2015-06-11)
+---------------------------
+
+* Undoes formatting changes in version 0.3.7
+* Description ALWAYS starts on same line as type in output::
+
+    attr (type): description
+
+  renders as::
+
+    .. attribute:: attr
+
+       *type* -- description
+
+  whereas::
+
+    attr (type):
+        description
+
+  ALSO renders as::
+
+    .. attribute:: attr
+
+       *type* -- description
+
+
 Version 0.3.9 (2015-06-10)
 --------------------------
 
