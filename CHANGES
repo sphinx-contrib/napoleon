@@ -7,7 +7,7 @@ Version 0.3.9 (2015-06-10)
 --------------------------
 
 * Formatting in Raises section updated to match Args, Returns, Yields, etc...
-* If a newline is present immediately after the color in Raises section, then
+* If a newline is present immediately after the colon in Raises section, then
   the output will also have a line break, with no m-dash separator
 
 
