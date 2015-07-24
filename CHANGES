@@ -3,6 +3,13 @@
 This file describes user-visible changes between the extension versions.
 
 
+Version 0.3.11 (2015-07-24)
+---------------------------
+
+* NumpyDoc section headers may be delimited by two or more underline characters
+* Google style section headers must be followed by exactly one colon
+
+
 Version 0.3.10 (2015-06-11)
 ---------------------------
 
