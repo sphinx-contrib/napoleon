@@ -1120,3 +1120,75 @@ Example Function
         app = mock.Mock()
         actual = str(NumpyDocstring(docstring, config, app, "method"))
         self.assertEqual(expected, actual)
+
+    def test_section_header_underline_length(self):
+        docstrings = [("""
+Summary line
+
+Example
+-
+Multiline example
+body
+
+""", """
+Summary line
+
+Example
+-
+Multiline example
+body
+"""),
+                      ################################
+                      ("""
+Summary line
+
+Example
+--
+Multiline example
+body
+
+""", """
+Summary line
+
+.. rubric:: Example
+
+Multiline example
+body
+"""),
+                      ################################
+                      ("""
+Summary line
+
+Example
+-------
+Multiline example
+body
+
+""", """
+Summary line
+
+.. rubric:: Example
+
+Multiline example
+body
+"""),
+                      ################################
+                      ("""
+Summary line
+
+Example
+------------
+Multiline example
+body
+
+""", """
+Summary line
+
+.. rubric:: Example
+
+Multiline example
+body
+""")]
+        for docstring, expected in docstrings:
+            actual = str(NumpyDocstring(docstring))
+            self.assertEqual(expected, actual)

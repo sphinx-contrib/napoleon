@@ -15,8 +15,9 @@ from six.moves import range
 
 
 _directive_regex = re.compile(r'\.\. \S+::')
-_google_section_regex = re.compile(r'^(\s|\w)+:$')
+_google_section_regex = re.compile(r'^(\s|\w)+:\s*$')
 _google_typed_arg_regex = re.compile(r'\s*(.+?)\s*\(\s*(.+?)\s*\)')
+_numpy_section_regex = re.compile(r'^[=\-`:\'"~^_*+#<>]{2,}\s*$')
 _xref_regex = re.compile(r'(:\w+:\S+:`.+?`|:\S+:`.+?`|`.+?`)')
 
 
@@ -801,8 +802,7 @@ class NumpyDocstring(GoogleDocstring):
         section, underline = self._line_iter.peek(2)
         section = section.lower()
         if section in self._sections and isinstance(underline, string_types):
-            pattern = r'[=\-`:\'"~^_*+#<>]{' + str(len(section)) + r'}$'
-            return bool(re.match(pattern, underline))
+            return bool(_numpy_section_regex.match(underline))
         elif self._directive_sections:
             if _directive_regex.match(section):
                 for directive_section in self._directive_sections:
