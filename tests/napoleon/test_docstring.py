@@ -559,6 +559,60 @@ Code sample for usage::
         actual = str(GoogleDocstring(docstring))
         self.assertEqual(expected, actual)
 
+    def test_section_header_formatting(self):
+        docstrings = [("""
+Summary line
+
+Example:
+    Multiline reStructuredText
+    literal code block
+
+""", """
+Summary line
+
+.. rubric:: Example
+
+Multiline reStructuredText
+literal code block
+"""),
+                      ################################
+                      ("""
+Summary line
+
+Example::
+
+    Multiline reStructuredText
+    literal code block
+
+""", """
+Summary line
+
+Example::
+
+    Multiline reStructuredText
+    literal code block
+"""),
+                      ################################
+                      ("""
+Summary line
+
+:Example:
+
+    Multiline reStructuredText
+    literal code block
+
+""", """
+Summary line
+
+:Example:
+
+    Multiline reStructuredText
+    literal code block
+""")]
+        for docstring, expected in docstrings:
+            actual = str(GoogleDocstring(docstring))
+            self.assertEqual(expected, actual)
+
 
 class NumpyDocstringTest(BaseDocstringTest):
     docstrings = [(

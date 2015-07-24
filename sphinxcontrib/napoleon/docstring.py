@@ -15,6 +15,7 @@ from six.moves import range
 
 
 _directive_regex = re.compile(r'\.\. \S+::')
+_google_section_regex = re.compile(r'^(\s|\w)+:$')
 _google_typed_arg_regex = re.compile(r'\s*(.+?)\s*\(\s*(.+?)\s*\)')
 _xref_regex = re.compile(r'(:\w+:\S+:`.+?`|:\S+:`.+?`|`.+?`)')
 
@@ -408,7 +409,8 @@ class GoogleDocstring(object):
 
     def _is_section_header(self):
         section = self._line_iter.peek().lower()
-        if section.strip(':') in self._sections:
+        match = _google_section_regex.match(section)
+        if match and section.strip(':') in self._sections:
             header_indent = self._get_indent(section)
             section_indent = self._get_current_indent(peek_ahead=1)
             return section_indent > header_indent
