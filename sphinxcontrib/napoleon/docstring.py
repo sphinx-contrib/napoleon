@@ -136,6 +136,7 @@ class GoogleDocstring(object):
                 'raises': self._parse_raises_section,
                 'references': self._parse_references_section,
                 'see also': self._parse_see_also_section,
+                'todo': self._parse_todo_section,
                 'warning': self._parse_warning_section,
                 'warnings': self._parse_warning_section,
                 'warns': self._parse_warns_section,
@@ -611,6 +612,10 @@ class GoogleDocstring(object):
     def _parse_see_also_section(self, section):
         lines = self._consume_to_next_section()
         return self._format_admonition('seealso', lines)
+
+    def _parse_todo_section(self, section):
+        lines = self._consume_to_next_section()
+        return self._format_admonition('todo', lines)
 
     def _parse_warning_section(self, section):
         lines = self._consume_to_next_section()
