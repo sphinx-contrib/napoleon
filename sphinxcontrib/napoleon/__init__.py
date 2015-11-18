@@ -7,7 +7,9 @@
 
 import sys
 
-from six import iteritems
+from six import PY2, iteritems
+
+import sphinx
 from sphinxcontrib.napoleon.docstring import GoogleDocstring, NumpyDocstring
 from sphinxcontrib.napoleon._version import __version__
 assert __version__  # silence pyflakes
@@ -30,7 +32,7 @@ class Config(object):
         napoleon_google_docstring = True
         napoleon_numpy_docstring = True
         napoleon_include_private_with_doc = False
-        napoleon_include_special_with_doc = True
+        napoleon_include_special_with_doc = False
         napoleon_use_admonition_for_examples = False
         napoleon_use_admonition_for_notes = False
         napoleon_use_admonition_for_references = False
@@ -67,7 +69,7 @@ class Config(object):
                 # This will NOT be included in the docs
                 pass
 
-    napoleon_include_special_with_doc : bool, defaults to True
+    napoleon_include_special_with_doc : bool, defaults to False
         True to include special members (like ``__membername__``) with
         docstrings in the documentation. False to fall back to Sphinx's
         default behavior.
@@ -205,7 +207,7 @@ class Config(object):
         'napoleon_google_docstring': (True, 'env'),
         'napoleon_numpy_docstring': (True, 'env'),
         'napoleon_include_private_with_doc': (False, 'env'),
-        'napoleon_include_special_with_doc': (True, 'env'),
+        'napoleon_include_special_with_doc': (False, 'env'),
         'napoleon_use_admonition_for_examples': (False, 'env'),
         'napoleon_use_admonition_for_notes': (False, 'env'),
         'napoleon_use_admonition_for_references': (False, 'env'),
@@ -242,7 +244,6 @@ def setup(app):
 
     `The Extension API <http://sphinx-doc.org/extdev/appapi.html>`_
 
-
     """
     from sphinx.application import Sphinx
     if not isinstance(app, Sphinx):
@@ -253,6 +254,8 @@ def setup(app):
 
     for name, (default, rebuild) in iteritems(Config._config_values):
         app.add_config_value(name, default, rebuild)
+    # Sphinx>=1.3 uses __display_version__
+    return {'version': sphinx.__version__, 'parallel_read_safe': True}
 
 
 def _process_docstring(app, what, name, obj, options, lines):
@@ -348,12 +351,12 @@ def _skip_member(app, what, name, obj, skip, options):
     if name != '__weakref__' and name != '__init__' and has_doc and is_member:
         cls_is_owner = False
         if what == 'class' or what == 'exception':
-            if sys.version_info[0] < 3:
+            if PY2:
                 cls = getattr(obj, 'im_class', getattr(obj, '__objclass__',
                               None))
                 cls_is_owner = (cls and hasattr(cls, name) and
                                 name in cls.__dict__)
-            elif sys.version_info[1] >= 3:
+            elif sys.version_info >= (3, 3):
                 qualname = getattr(obj, '__qualname__', '')
                 cls_path, _, _ = qualname.rpartition('.')
                 if cls_path:
@@ -367,7 +370,7 @@ def _skip_member(app, what, name, obj, skip, options):
                             cls = functools.reduce(getattr, mod_path, mod)
                         else:
                             cls = obj.__globals__[cls_path]
-                    except:
+                    except Exception:
                         cls_is_owner = False
                     else:
                         cls_is_owner = (cls and hasattr(cls, name) and
