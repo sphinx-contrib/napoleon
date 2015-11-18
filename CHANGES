@@ -3,6 +3,13 @@
 This file describes user-visible changes between the extension versions.
 
 
+Version 0.4.1 (2015-11-17)
+--------------------------
+
+ * Sets napoleon_include_special_with_doc to False by default
+ * Removes upper bound on required Sphinx version (sphinx>=1.3 now allowed)
+
+
 Version 0.4 (2015-11-17)
 ------------------------
 
