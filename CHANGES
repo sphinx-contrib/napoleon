@@ -3,6 +3,14 @@
 This file describes user-visible changes between the extension versions.
 
 
+Version 0.4 (2015-11-17)
+------------------------
+
+ * Adds support for Todo section header and Todo extension integration
+ * Changes __unicode__ to conditionally use "u" literal string for
+   Python 3.2 compatibility
+
+
 Version 0.3.11 (2015-07-24)
 ---------------------------
 
