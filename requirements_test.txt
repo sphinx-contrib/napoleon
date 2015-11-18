@@ -1,5 +1,5 @@
-six>=1.7
-pockets>=0.2.1
+six>=1.5.2
+pockets>=0.3
 coverage>=3.6
 flake8>=2.0
 mock>=1.0.1

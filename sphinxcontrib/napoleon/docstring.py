@@ -9,7 +9,7 @@ import inspect
 import re
 import sys
 
-from pockets import modify_iter
+from pockets import modify_iter, UnicodeMixin
 from six import string_types
 from six.moves import range
 
@@ -21,7 +21,7 @@ _numpy_section_regex = re.compile(r'^[=\-`:\'"~^_*+#<>]{2,}\s*$')
 _xref_regex = re.compile(r'(:\w+:\S+:`.+?`|:\S+:`.+?`|`.+?`)')
 
 
-class GoogleDocstring(object):
+class GoogleDocstring(UnicodeMixin):
     """Convert Google style docstrings to reStructuredText.
 
     Parameters
@@ -145,20 +145,6 @@ class GoogleDocstring(object):
             }
         self._parse()
 
-    def __str__(self):
-        """Return the parsed docstring in reStructuredText format.
-
-        Returns
-        -------
-        str
-            UTF-8 encoded version of the docstring.
-
-        """
-        if sys.version_info[0] >= 3:
-            return self.__unicode__()
-        else:
-            return self.__unicode__().encode('utf8')
-
     def __unicode__(self):
         """Return the parsed docstring in reStructuredText format.
 
@@ -168,7 +154,10 @@ class GoogleDocstring(object):
             Unicode version of the docstring.
 
         """
-        return u'\n'.join(self.lines())
+        if sys.version_info[0] >= 3:
+            return '\n'.join(self.lines())
+        else:
+            return u'\n'.join(self.lines())
 
     def lines(self):
         """Return the parsed lines of the docstring in reStructuredText format.
