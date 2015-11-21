@@ -203,10 +203,7 @@ class GoogleDocstring(UnicodeMixin):
                 _name = match.group(1)
                 _type = match.group(2)
 
-        if _name[:2] == '**':
-            _name = r'\*\*'+_name[2:]
-        elif _name[:1] == '*':
-            _name = r'\*'+_name[1:]
+        _name = self._escape_args_and_kwargs(_name)
 
         if prefer_type and not _type:
             _type, _name = _name, _type
@@ -287,6 +284,14 @@ class GoogleDocstring(UnicodeMixin):
         else:
             min_indent = self._get_min_indent(lines)
             return [line[min_indent:] for line in lines]
+
+    def _escape_args_and_kwargs(self, name):
+        if name[:2] == '**':
+            return r'\*\*' + name[2:]
+        elif name[:1] == '*':
+            return r'\*' + name[1:]
+        else:
+            return name
 
     def _format_admonition(self, admonition, lines):
         lines = self._strip_empty(lines)
@@ -762,6 +767,7 @@ class NumpyDocstring(GoogleDocstring):
         else:
             _name, _type = line, ''
         _name, _type = _name.strip(), _type.strip()
+        _name = self._escape_args_and_kwargs(_name)
         if prefer_type and not _type:
             _type, _name = _name, _type
         indent = self._get_indent(line)
