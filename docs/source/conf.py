@@ -88,7 +88,6 @@ needs_sphinx = '1.2'
 extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.doctest',
               'sphinx.ext.coverage',
-              'sphinx.ext.mathjax',
               'sphinx.ext.viewcode',
               'sphinxcontrib.napoleon']
 
