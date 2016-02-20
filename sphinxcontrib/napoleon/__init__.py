@@ -9,7 +9,6 @@ import sys
 
 from six import PY2, iteritems
 
-import sphinx
 from sphinxcontrib.napoleon.docstring import GoogleDocstring, NumpyDocstring
 from sphinxcontrib.napoleon._version import __version__
 assert __version__  # silence pyflakes
@@ -245,6 +244,7 @@ def setup(app):
     `The Extension API <http://sphinx-doc.org/extdev/appapi.html>`_
 
     """
+    import sphinx
     from sphinx.application import Sphinx
     if not isinstance(app, Sphinx):
         return  # probably called by tests
