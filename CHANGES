@@ -3,6 +3,12 @@
 This file describes user-visible changes between the extension versions.
 
 
+Version 0.5.0 (2016-02-20)
+--------------------------
+
+ * Removes dependency on Sphinx, allows non-sphinx projects to use napoleon
+
+
 Version 0.4.4 (2016-01-27)
 --------------------------
 
