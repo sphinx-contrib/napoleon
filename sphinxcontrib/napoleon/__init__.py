@@ -244,7 +244,6 @@ def setup(app):
     `The Extension API <http://sphinx-doc.org/extdev/appapi.html>`_
 
     """
-    import sphinx
     from sphinx.application import Sphinx
     if not isinstance(app, Sphinx):
         return  # probably called by tests
@@ -254,8 +253,7 @@ def setup(app):
 
     for name, (default, rebuild) in iteritems(Config._config_values):
         app.add_config_value(name, default, rebuild)
-    # Sphinx>=1.3 uses __display_version__
-    return {'version': sphinx.__version__, 'parallel_read_safe': True}
+    return {'version': __version__, 'parallel_read_safe': True}
 
 
 def _process_docstring(app, what, name, obj, options, lines):
