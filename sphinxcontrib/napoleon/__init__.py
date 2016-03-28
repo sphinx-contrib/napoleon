@@ -38,6 +38,7 @@ class Config(object):
         napoleon_use_ivar = False
         napoleon_use_param = True
         napoleon_use_rtype = True
+        napoleon_use_keyword = True
 
     .. _Google style:
        http://google.github.io/styleguide/pyguide.html
@@ -181,6 +182,21 @@ class Config(object):
                          * **arg2** (*int, optional*) --
                            Description of `arg2`, defaults to 0
 
+    napoleon_use_keyword : bool, defaults to True
+        True to use a ``:keyword:`` role for each function keyword argument.
+        False to use a single ``:keyword arguments:`` role for all the
+        keywords.
+
+        This behaves similarly to  :attr:`napoleon_use_param`. Note unlike
+        docutils, ``:keyword:`` and ``:param:`` will not be treated the same
+        way - there will be a separate "Keyword Arguments" section, rendered
+        in the same fashion as "Parameters" section (type links created if
+        possible)
+
+        See Also
+        --------
+        :attr:`napoleon_use_param`
+
     napoleon_use_rtype : bool, defaults to True
         True to use the ``:rtype:`` role for the return type. False to output
         the return type inline with the description.
@@ -213,6 +229,7 @@ class Config(object):
         'napoleon_use_ivar': (False, 'env'),
         'napoleon_use_param': (True, 'env'),
         'napoleon_use_rtype': (True, 'env'),
+        'napoleon_use_keyword': (True, 'env')
     }
 
     def __init__(self, **settings):
@@ -248,12 +265,31 @@ def setup(app):
     if not isinstance(app, Sphinx):
         return  # probably called by tests
 
+    _patch_python_domain()
+
     app.connect('autodoc-process-docstring', _process_docstring)
     app.connect('autodoc-skip-member', _skip_member)
 
     for name, (default, rebuild) in iteritems(Config._config_values):
         app.add_config_value(name, default, rebuild)
     return {'version': __version__, 'parallel_read_safe': True}
+
+
+def _patch_python_domain():
+    import sphinx.domains.python
+    from sphinx.domains.python import PyTypedField
+    import sphinx.locale
+    l_ = sphinx.locale.lazy_gettext
+    for doc_field in sphinx.domains.python.PyObject.doc_field_types:
+        if doc_field.name == 'parameter':
+            doc_field.names = ('param', 'parameter', 'arg', 'argument')
+            break
+    sphinx.domains.python.PyObject.doc_field_types.append(
+        PyTypedField('keyword', label=l_('Keyword Arguments'),
+                     names=('keyword', 'kwarg', 'kwparam'),
+                     typerolename='obj', typenames=('paramtype', 'kwtype'),
+                     can_collapse=True),
+    )
 
 
 def _process_docstring(app, what, name, obj, options, lines):
