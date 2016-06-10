@@ -58,7 +58,11 @@ source code files.
 Getting Started
 ---------------
 
-1. After `setting up Sphinx`_ to build your docs, enable napoleon in the
+1. Install the napoleon extension::
+
+       $ pip install sphinxcontrib-napoleon
+
+2. After `setting up Sphinx`_ to build your docs, enable napoleon in the
    Sphinx `conf.py` file::
 
        # conf.py
@@ -66,7 +70,7 @@ Getting Started
        # Add autodoc and napoleon to the extensions list
        extensions = ['sphinx.ext.autodoc', 'sphinxcontrib.napoleon']
 
-2. Use `sphinx-apidoc` to build your API documentation::
+3. Use `sphinx-apidoc` to build your API documentation::
 
        $ sphinx-apidoc -f -o docs/source projectdir
 
