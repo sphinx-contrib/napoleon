@@ -56,7 +56,11 @@ source code files.
 Getting Started
 ---------------
 
-1. After `setting up Sphinx`_ to build your docs, enable napoleon in the
+1. Install the napoleon extension::
+
+       $ pip install sphinxcontrib-napoleon
+
+2. After `setting up Sphinx`_ to build your docs, enable napoleon in the
    Sphinx `conf.py` file::
 
        # conf.py
@@ -171,4 +175,4 @@ The choice between styles is largely aesthetic, but the two styles should
 not be mixed. Choose one style for your project and be consistent with it.
 
 
-For full documentation see http://sphinxcontrib-napoleon.readthedocs.org
+For full documentation see https://sphinxcontrib-napoleon.readthedocs.io

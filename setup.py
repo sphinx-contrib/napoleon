@@ -19,7 +19,7 @@ exec(open(version_path).read())
 setup(
     name='sphinxcontrib-napoleon',
     version=__version__,
-    url='http://sphinxcontrib-napoleon.readthedocs.org',
+    url='https://sphinxcontrib-napoleon.readthedocs.io',
     download_url='http://pypi.python.org/pypi/sphinxcontrib-napoleon',
     license='BSD',
     author='Rob Ruana',
