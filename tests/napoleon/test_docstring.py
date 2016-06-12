@@ -327,7 +327,9 @@ Returns:
         codecode
 """
         expected = """
-:returns: foo::
+:returns:
+
+          foo::
 
               codecode
               codecode
