@@ -5,9 +5,6 @@ This module demonstrates documentation as specified by the `Google Python
 Style Guide`_. Docstrings may extend over multiple lines. Sections are created
 with a section header and a colon followed by a block of indented text.
 
-Type annotations are specified according to `PEP 484`_ using Python 3
-compatible function annotations.  For Python 2 compatible type annotations
-see `PEP 484`_.
 
 Example:
     Examples can be given using either the ``Example`` or ``Examples``
@@ -20,7 +17,7 @@ Section breaks are created by resuming unindented text. Section breaks
 are also implicitly created anytime a new section starts.
 
 Attributes:
-    module_level_variable1: Module level variables may be documented in
+    module_level_variable1 (int): Module level variables may be documented in
         either the ``Attributes`` section of the module docstring, or in an
         inline docstring immediately following the variable.
 
@@ -35,51 +32,85 @@ Todo:
 .. _Google Python Style Guide:
    http://google.github.io/styleguide/pyguide.html
 
-.. _PEP 484:
-   https://www.python.org/dev/peps/pep-0484/
-
 """
-
-from typing import Iterator, List, Optional
 
 module_level_variable1 = 12345
 
 module_level_variable2 = 98765
-"""Module level variable documented inline.
+"""int: Module level variable documented inline.
 
-The docstring may span multiple lines.
+The docstring may span multiple lines. The type may optionally be specified
+on the first line, separated by a colon.
 """
 
 
-def module_level_function(param1: int, param2: Optional[str]=None,
-                          *args: str, **kwargs: int) -> bool:
+def function_with_types_in_docstring(param1, param2):
+    """Example function with types documented in the docstring.
+
+    `PEP 484`_ type annotations are supported. If attribute, parameter, and
+    return types are annotated according to `PEP 484`_, they do not need to be
+    included in the docstring:
+
+    Args:
+        param1 (int): The first parameter.
+        param2 (str): The second parameter.
+
+    Returns:
+        bool: The return value. True for success, False otherwise.
+
+    .. _PEP 484:
+        https://www.python.org/dev/peps/pep-0484/
+
+    """
+
+
+def function_with_pep484_type_annotations(param1: int, param2: str) -> bool:
+    """Example function with PEP 484 type annotations.
+
+    Args:
+        param1: The first parameter.
+        param2: The second parameter.
+
+    Returns:
+        The return value. True for success, False otherwise.
+
+    """
+
+
+def module_level_function(param1, param2=None, *args, **kwargs):
     """This is an example of a module level function.
 
     Function parameters should be documented in the ``Args`` section. The name
-    of each parameter is required. The description of each parameter
+    of each parameter is required. The type and description of each parameter
     is optional, but should be included if not obvious.
+
+    Parameter types -- if given -- should be specified according to
+    `PEP 484`_, though `PEP 484`_ conformance isn't required or enforced.
 
     If \*args or \*\*kwargs are accepted,
     they should be listed as ``*args`` and ``**kwargs``.
 
     The format for a parameter is::
 
-        name: description
+        name (type): description
             The description may span multiple lines. Following
-            lines should be indented.
+            lines should be indented. The "(type)" is optional.
 
             Multiple paragraphs are supported in parameter
             descriptions.
 
     Args:
-        param1: The first parameter.
-        param2: The second parameter. Defaults to None.
+        param1 (int): The first parameter.
+        param2 (Optional[str]): The second parameter. Defaults to None.
             Second line of description should be indented.
         *args: Variable length argument list.
         **kwargs: Arbitrary keyword arguments.
 
     Returns:
-        True if successful, False otherwise.
+        bool: True if successful, False otherwise.
+
+        The return type is optional and may be specified at the beginning of
+        the ``Returns`` section followed by a colon.
 
         The ``Returns`` section may span multiple lines and paragraphs.
         Following lines should be indented to match the first line.
@@ -97,20 +128,24 @@ def module_level_function(param1: int, param2: Optional[str]=None,
             that are relevant to the interface.
         ValueError: If `param2` is equal to `param1`.
 
+
+    .. _PEP 484:
+       https://www.python.org/dev/peps/pep-0484/
+
     """
     if param1 == param2:
         raise ValueError('param1 may not be equal to param2')
     return True
 
 
-def example_generator(n: int) -> Iterator[int]:
+def example_generator(n):
     """Generators have a ``Yields`` section instead of a ``Returns`` section.
 
     Args:
-        n: The upper limit of the range to generate, from 0 to `n` - 1.
+        n (int): The upper limit of the range to generate, from 0 to `n` - 1.
 
     Yields:
-        The next number in the range of 0 to `n` - 1.
+        int: The next number in the range of 0 to `n` - 1.
 
     Examples:
         Examples should be written in doctest format, and should illustrate how
@@ -137,16 +172,16 @@ class ExampleError(Exception):
         Do not include the `self` parameter in the ``Args`` section.
 
     Args:
-        msg: Human readable string describing the exception.
-        code: Error code.
+        msg (str): Human readable string describing the exception.
+        code (Optional[int]): Error code.
 
     Attributes:
-        msg: Human readable string describing the exception.
-        code: Exception error code.
+        msg (str): Human readable string describing the exception.
+        code (int): Exception error code.
 
     """
 
-    def __init__(self, msg: str, code: Optional[int]) -> None:
+    def __init__(self, msg, code):
         self.msg = msg
         self.code = code
 
@@ -162,14 +197,20 @@ class ExampleClass(object):
     Properties created with the ``@property`` decorator should be documented
     in the property's getter method.
 
+    Attribute and property types -- if given -- should be specified according
+    to `PEP 484`_, though `PEP 484`_ conformance isn't required or enforced.
+
     Attributes:
-        attr1: Description of `attr1`.
-        attr2: Description of `attr2`.
+        attr1 (str): Description of `attr1`.
+        attr2 (Optional[int]): Description of `attr2`.
+
+
+    .. _PEP 484:
+       https://www.python.org/dev/peps/pep-0484/
 
     """
 
-    def __init__(self, param1: str, param2: Optional[int],
-                 param3: List[str]) -> None:
+    def __init__(self, param1, param2, param3):
         """Example of docstring on the __init__ method.
 
         The __init__ method may be documented in either the class level
@@ -182,30 +223,30 @@ class ExampleClass(object):
             Do not include the `self` parameter in the ``Args`` section.
 
         Args:
-            param1: Description of `param1`.
-            param2: Description of `param2`. Multiple
+            param1 (str): Description of `param1`.
+            param2 (Optional[int]): Description of `param2`. Multiple
                 lines are supported.
-            param3: Description of `param3`.
+            param3 (List[str]): Description of `param3`.
 
         """
         self.attr1 = param1
         self.attr2 = param2
         self.attr3 = param3  #: Doc comment *inline* with attribute
 
-        #: Doc comment *before* attribute, with type specified
+        #: List[str]: Doc comment *before* attribute, with type specified
         self.attr4 = ['attr4']
 
-        self.attr5 = None  # type: Optional[str]
-        """Docstring *after* attribute."""
+        self.attr5 = None
+        """Optional[str]: Docstring *after* attribute, with type specified."""
 
     @property
-    def readonly_property(self) -> str:
-        """Properties should be documented in their getter method."""
+    def readonly_property(self):
+        """str: Properties should be documented in their getter method."""
         return 'readonly_property'
 
     @property
-    def readwrite_property(self) -> List[str]:
-        """Properties with both a getter and setter should only
+    def readwrite_property(self):
+        """List[str]: Properties with both a getter and setter should only
         be documented in their getter method.
 
         If the setter method contains notable behavior, it should be
@@ -214,10 +255,10 @@ class ExampleClass(object):
         return ['readwrite_property']
 
     @readwrite_property.setter
-    def readwrite_property(self, value: List[str]) -> None:
+    def readwrite_property(self, value):
         value
 
-    def example_method(self, param1: int, param2: str) -> bool:
+    def example_method(self, param1, param2):
         """Class methods are similar to regular functions.
 
         Note:
@@ -233,7 +274,7 @@ class ExampleClass(object):
         """
         return True
 
-    def __special__(self) -> None:
+    def __special__(self):
         """By default special members with docstrings are not included.
 
         Special members are any methods or attributes that start with and
@@ -249,10 +290,10 @@ class ExampleClass(object):
         """
         pass
 
-    def __special_without_docstring__(self) -> None:
+    def __special_without_docstring__(self):
         pass
 
-    def _private(self) -> None:
+    def _private(self):
         """By default private members are not included.
 
         Private members are any methods or attributes that start with an
@@ -267,5 +308,5 @@ class ExampleClass(object):
         """
         pass
 
-    def _private_without_docstring(self) -> None:
+    def _private_without_docstring(self):
         pass
