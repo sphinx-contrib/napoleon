@@ -121,6 +121,70 @@ All of the following section headers are supported:
     * ``Yield`` *(alias of Yields)*
     * ``Yields``
 
+Google vs NumPy
+---------------
+
+Napoleon supports two styles of docstrings: `Google`_ and `NumPy`_. The
+main difference between the two styles is that Google uses indention to
+separate sections, whereas NumPy uses underlines.
+
+Google style::
+
+    def func(arg1, arg2):
+        """Summary line.
+
+        Extended description of function.
+
+        Args:
+            arg1 (int): Description of arg1
+            arg2 (str): Description of arg2
+
+        Returns:
+            bool: Description of return value
+
+        """
+        return True
+
+NumPy style::
+
+    def func(arg1, arg2):
+        """Summary line.
+
+        Extended description of function.
+
+        Parameters
+        ----------
+        arg1 : int
+            Description of arg1
+        arg2 : str
+            Description of arg2
+
+        Returns
+        -------
+        bool
+            Description of return value
+
+        """
+        return True
+
+NumPy style tends to require more vertical space, whereas Google style
+tends to use more horizontal space. Google style tends to be easier to
+read for short and simple docstrings, whereas NumPy style tends be easier
+to read for long and in-depth docstrings.
+
+The `Khan Academy`_ recommends using Google style.
+
+The choice between styles is largely aesthetic, but the two styles should
+not be mixed. Choose one style for your project and be consistent with it.
+
+.. seealso::
+
+   For complete examples:
+
+   * :ref:`example_google`
+   * :ref:`example_numpy`
+
+
 Type Annotations
 ----------------
 
@@ -187,69 +251,6 @@ Google style with types in docstrings::
 
 .. _Python 2/3 compatible annotations:
    https://www.python.org/dev/peps/pep-0484/#suggested-syntax-for-python-2-7-and-straddling-code
-
-Google vs NumPy
----------------
-
-Napoleon supports two styles of docstrings: `Google`_ and `NumPy`_. The
-main difference between the two styles is that Google uses indention to
-separate sections, whereas NumPy uses underlines.
-
-Google style::
-
-    def func(arg1, arg2):
-        """Summary line.
-
-        Extended description of function.
-
-        Args:
-            arg1 (int): Description of arg1
-            arg2 (str): Description of arg2
-
-        Returns:
-            bool: Description of return value
-
-        """
-        return True
-
-NumPy style::
-
-    def func(arg1, arg2):
-        """Summary line.
-
-        Extended description of function.
-
-        Parameters
-        ----------
-        arg1 : int
-            Description of arg1
-        arg2 : str
-            Description of arg2
-
-        Returns
-        -------
-        bool
-            Description of return value
-
-        """
-        return True
-
-NumPy style tends to require more vertical space, whereas Google style
-tends to use more horizontal space. Google style tends to be easier to
-read for short and simple docstrings, whereas NumPy style tends be easier
-to read for long and in-depth docstrings.
-
-The `Khan Academy`_ recommends using Google style.
-
-The choice between styles is largely aesthetic, but the two styles should
-not be mixed. Choose one style for your project and be consistent with it.
-
-.. seealso::
-
-   For complete examples:
-
-   * :ref:`example_google`
-   * :ref:`example_numpy`
 
 
 Configuration
