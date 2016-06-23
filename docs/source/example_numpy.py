@@ -106,9 +106,6 @@ def module_level_function(param1, param2=None, *args, **kwargs):
     The name of each parameter is required. The type and description of each
     parameter is optional, but should be included if not obvious.
 
-    Parameter types -- if given -- should be specified according to
-    `PEP 484`_, though `PEP 484`_ conformance isn't required or enforced.
-
     If \*args or \*\*kwargs are accepted,
     they should be listed as ``*args`` and ``**kwargs``.
 
@@ -159,10 +156,6 @@ def module_level_function(param1, param2=None, *args, **kwargs):
         that are relevant to the interface.
     ValueError
         If `param2` is equal to `param1`.
-
-
-    .. _PEP 484:
-       https://www.python.org/dev/peps/pep-0484/
 
     """
     if param1 == param2:
@@ -241,19 +234,12 @@ class ExampleClass(object):
     Properties created with the ``@property`` decorator should be documented
     in the property's getter method.
 
-    Attribute and property types -- if given -- should be specified according
-    to `PEP 484`_, though `PEP 484`_ conformance isn't required or enforced.
-
     Attributes
     ----------
     attr1 : str
         Description of `attr1`.
     attr2 : :obj:`int`, optional
         Description of `attr2`.
-
-
-    .. _PEP 484:
-       https://www.python.org/dev/peps/pep-0484/
 
     """
 

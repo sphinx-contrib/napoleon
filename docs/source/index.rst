@@ -251,8 +251,6 @@ not be mixed. Choose one style for your project and be consistent with it.
    * :ref:`example_google`
    * :ref:`example_numpy`
 
-   For Python type annotations, see `PEP 484`_.
-
 
 Configuration
 =============
