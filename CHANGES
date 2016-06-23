@@ -3,6 +3,13 @@
 This file describes user-visible changes between the extension versions.
 
 
+Version 0.5.2 (2016-06-23)
+--------------------------
+
+ * Fixes issue in which monkey patching :keyword: support breaks with older
+   versions of Sphinx (at least sphinx<=1.2.3)
+
+
 Version 0.5.1 (2016-06-12)
 --------------------------
 
