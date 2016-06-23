@@ -61,14 +61,14 @@ napoleon_use_ivar = False
 #     :type arg1: type
 # If False, output function parameters using the :parameters: field:
 #     :parameters: **arg1** (*type*) -- Description of arg1.
-napoleon_use_param = False
+napoleon_use_param = True
 
 # If True, use Sphinx :rtype: directive for the return type:
 #     :returns: Description of return value.
 #     :rtype: type
 # If False, output the return type inline with the return description:
 #     :returns: *type* -- Description of return value.
-napoleon_use_rtype = False
+napoleon_use_rtype = True
 
 # -- Autodoc configuration -----------------------------------------------------
 
@@ -89,7 +89,14 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.doctest',
               'sphinx.ext.coverage',
               'sphinx.ext.viewcode',
+              'sphinx.ext.intersphinx',
               'sphinxcontrib.napoleon']
+
+intersphinx_mapping = {
+  'pockets': ('https://pockets.readthedocs.io/en/latest/', None),
+  'python': ('https://docs.python.org/3.4', None),
+  'sphinx': ('http://sphinx.readthedocs.io/en/latest/', None)
+}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

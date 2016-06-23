@@ -100,7 +100,7 @@ def module_level_function(param1, param2=None, *args, **kwargs):
 
     Args:
         param1 (int): The first parameter.
-        param2 (Optional[str]): The second parameter. Defaults to None.
+        param2 (:obj:`str`, optional): The second parameter. Defaults to None.
             Second line of description should be indented.
         *args: Variable length argument list.
         **kwargs: Arbitrary keyword arguments.
@@ -172,7 +172,7 @@ class ExampleError(Exception):
 
     Args:
         msg (str): Human readable string describing the exception.
-        code (Optional[int]): Error code.
+        code (:obj:`int`, optional): Error code.
 
     Attributes:
         msg (str): Human readable string describing the exception.
@@ -201,7 +201,7 @@ class ExampleClass(object):
 
     Attributes:
         attr1 (str): Description of `attr1`.
-        attr2 (Optional[int]): Description of `attr2`.
+        attr2 (:obj:`int`, optional): Description of `attr2`.
 
 
     .. _PEP 484:
@@ -223,20 +223,20 @@ class ExampleClass(object):
 
         Args:
             param1 (str): Description of `param1`.
-            param2 (Optional[int]): Description of `param2`. Multiple
+            param2 (:obj:`int`, optional): Description of `param2`. Multiple
                 lines are supported.
-            param3 (List[str]): Description of `param3`.
+            param3 (:obj:`list` of :obj:`str`): Description of `param3`.
 
         """
         self.attr1 = param1
         self.attr2 = param2
         self.attr3 = param3  #: Doc comment *inline* with attribute
 
-        #: List[str]: Doc comment *before* attribute, with type specified
+        #: list of str: Doc comment *before* attribute, with type specified
         self.attr4 = ['attr4']
 
         self.attr5 = None
-        """Optional[str]: Docstring *after* attribute, with type specified."""
+        """str: Docstring *after* attribute, with type specified."""
 
     @property
     def readonly_property(self):
@@ -245,8 +245,8 @@ class ExampleClass(object):
 
     @property
     def readwrite_property(self):
-        """List[str]: Properties with both a getter and setter should only
-        be documented in their getter method.
+        """:obj:`list` of :obj:`str`: Properties with both a getter and setter
+        should only be documented in their getter method.
 
         If the setter method contains notable behavior, it should be
         mentioned here.

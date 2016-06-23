@@ -128,7 +128,7 @@ def module_level_function(param1, param2=None, *args, **kwargs):
     ----------
     param1 : int
         The first parameter.
-    param2 : Optional[str]
+    param2 : :obj:`str`, optional
         The second parameter.
     *args
         Variable length argument list.
@@ -213,7 +213,7 @@ class ExampleError(Exception):
     ----------
     msg : str
         Human readable string describing the exception.
-    code : Optional[int]
+    code : :obj:`int`, optional
         Numeric error code.
 
     Attributes
@@ -248,7 +248,7 @@ class ExampleClass(object):
     ----------
     attr1 : str
         Description of `attr1`.
-    attr2 : Optional[int]
+    attr2 : :obj:`int`, optional
         Description of `attr2`.
 
 
@@ -274,10 +274,10 @@ class ExampleClass(object):
         ----------
         param1 : str
             Description of `param1`.
-        param2 : List[str]
+        param2 : :obj:`list` of :obj:`str`
             Description of `param2`. Multiple
             lines are supported.
-        param3 : Optional[int]
+        param3 : :obj:`int`, optional
             Description of `param3`.
 
         """
@@ -285,11 +285,11 @@ class ExampleClass(object):
         self.attr2 = param2
         self.attr3 = param3  #: Doc comment *inline* with attribute
 
-        #: List[str]: Doc comment *before* attribute, with type specified
+        #: list of str: Doc comment *before* attribute, with type specified
         self.attr4 = ["attr4"]
 
         self.attr5 = None
-        """Optional[str]: Docstring *after* attribute, with type specified."""
+        """str: Docstring *after* attribute, with type specified."""
 
     @property
     def readonly_property(self):
@@ -298,8 +298,8 @@ class ExampleClass(object):
 
     @property
     def readwrite_property(self):
-        """List[str]: Properties with both a getter and setter should only
-        be documented in their getter method.
+        """:obj:`list` of :obj:`str`: Properties with both a getter and setter
+        should only be documented in their getter method.
 
         If the setter method contains notable behavior, it should be
         mentioned here.
