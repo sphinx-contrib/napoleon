@@ -294,20 +294,23 @@ def setup(app):
 
 
 def _patch_python_domain():
-    import sphinx.domains.python
-    from sphinx.domains.python import PyTypedField
-    import sphinx.locale
-    l_ = sphinx.locale.lazy_gettext
-    for doc_field in sphinx.domains.python.PyObject.doc_field_types:
-        if doc_field.name == 'parameter':
-            doc_field.names = ('param', 'parameter', 'arg', 'argument')
-            break
-    sphinx.domains.python.PyObject.doc_field_types.append(
-        PyTypedField('keyword', label=l_('Keyword Arguments'),
-                     names=('keyword', 'kwarg', 'kwparam'),
-                     typerolename='obj', typenames=('paramtype', 'kwtype'),
-                     can_collapse=True),
-    )
+    try:
+        from sphinx.domains.python import PyTypedField
+    except ImportError:
+        pass
+    else:
+        import sphinx.domains.python
+        import sphinx.locale
+        l_ = sphinx.locale.lazy_gettext
+        for doc_field in sphinx.domains.python.PyObject.doc_field_types:
+            if doc_field.name == 'parameter':
+                doc_field.names = ('param', 'parameter', 'arg', 'argument')
+                break
+        sphinx.domains.python.PyObject.doc_field_types.append(
+            PyTypedField('keyword', label=l_('Keyword Arguments'),
+                         names=('keyword', 'kwarg', 'kwparam'),
+                         typerolename='obj', typenames=('paramtype', 'kwtype'),
+                         can_collapse=True))
 
 
 def _process_docstring(app, what, name, obj, options, lines):
