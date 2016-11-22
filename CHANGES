@@ -3,6 +3,18 @@
 This file describes user-visible changes between the extension versions.
 
 
+Version 0.5.4 (2016-11-21)
+--------------------------
+
+ * Improves param type parsing
+
+
+Version 0.5.3 (2016-08-06)
+--------------------------
+
+ * Fixes parsing of Google style parameter types that contain parenthesis
+
+
 Version 0.5.2 (2016-06-23)
 --------------------------
 
