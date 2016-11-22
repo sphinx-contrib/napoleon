@@ -13,6 +13,10 @@ from sphinxcontrib.napoleon.docstring import GoogleDocstring, NumpyDocstring
 from sphinxcontrib.napoleon._version import __version__
 assert __version__  # silence pyflakes
 
+if False:
+    # For type annotation
+    from typing import Any  # NOQA
+
 
 class Config(object):
     """Sphinx napoleon extension settings in `conf.py`.
@@ -251,6 +255,7 @@ class Config(object):
     }
 
     def __init__(self, **settings):
+        # type: (Any) -> None
         for name, (default, rebuild) in iteritems(self._config_values):
             setattr(self, name, default)
         for name, value in iteritems(settings):
@@ -258,6 +263,7 @@ class Config(object):
 
 
 def setup(app):
+    # type: (Sphinx) -> Dict[unicode, Any]
     """Sphinx extension setup function.
 
     When the extension is loaded, Sphinx imports this module and executes
@@ -281,7 +287,8 @@ def setup(app):
     """
     from sphinx.application import Sphinx
     if not isinstance(app, Sphinx):
-        return  # probably called by tests
+        return  # type: ignore
+                # probably called by tests
 
     _patch_python_domain()
 
@@ -294,13 +301,14 @@ def setup(app):
 
 
 def _patch_python_domain():
+    # type: () -> None
     try:
         from sphinx.domains.python import PyTypedField
     except ImportError:
         pass
     else:
         import sphinx.domains.python
-        import sphinx.locale
+        import sphinx.locale  # type: ignore
         l_ = sphinx.locale.lazy_gettext
         for doc_field in sphinx.domains.python.PyObject.doc_field_types:
             if doc_field.name == 'parameter':
@@ -314,6 +322,7 @@ def _patch_python_domain():
 
 
 def _process_docstring(app, what, name, obj, options, lines):
+    # type: (Sphinx, unicode, unicode, Any, Any, List[unicode]) -> None
     """Process the docstring for a given python object.
 
     Called when autodoc has read and processed a docstring. `lines` is a list
@@ -350,6 +359,7 @@ def _process_docstring(app, what, name, obj, options, lines):
 
     """
     result_lines = lines
+    docstring = None  # type: GoogleDocstring
     if app.config.napoleon_numpy_docstring:
         docstring = NumpyDocstring(result_lines, app.config, app, what, name,
                                    obj, options)
@@ -362,6 +372,7 @@ def _process_docstring(app, what, name, obj, options, lines):
 
 
 def _skip_member(app, what, name, obj, skip, options):
+    # type: (Sphinx, unicode, unicode, Any, bool, Any) -> bool
     """Determine if private and special class members are included in docs.
 
     The following settings in conf.py determine if private and special class

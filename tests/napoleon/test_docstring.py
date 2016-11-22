@@ -220,6 +220,24 @@ class GoogleDocstringTest(BaseDocstringTest):
         """
         Single line summary
 
+        Args:
+          arg1 (list(int)): Description
+          arg2 (list[int]): Description
+          arg3 (dict(str, int)): Description
+          arg4 (dict[str, int]): Description
+        """,
+        """
+        Single line summary
+
+        :Parameters: * **arg1** (*list(int)*) -- Description
+                     * **arg2** (*list[int]*) -- Description
+                     * **arg3** (*dict(str, int)*) -- Description
+                     * **arg4** (*dict[str, int]*) -- Description
+        """
+    ), (
+        """
+        Single line summary
+
         Yield:
           str:Extended
           description of yielded value
@@ -264,8 +282,9 @@ Construct a new XBlock.
 This class should only be used by runtimes.
 
 Arguments:
-    runtime (:class:`Runtime`): Use it to access the environment.
-        It is available in XBlock code as ``self.runtime``.
+    runtime (:class:`~typing.Dict`\[:class:`int`,:class:`str`\]): Use it to
+        access the environment. It is available in XBlock code
+        as ``self.runtime``.
 
     field_data (:class:`FieldData`): Interface used by the XBlock
         fields to access their data from wherever it is persisted.
@@ -280,9 +299,10 @@ Construct a new XBlock.
 
 This class should only be used by runtimes.
 
-:param runtime: Use it to access the environment.
-                It is available in XBlock code as ``self.runtime``.
-:type runtime: :class:`Runtime`
+:param runtime: Use it to
+                access the environment. It is available in XBlock code
+                as ``self.runtime``.
+:type runtime: :class:`~typing.Dict`\[:class:`int`,:class:`str`\]
 :param field_data: Interface used by the XBlock
                    fields to access their data from wherever it is persisted.
 :type field_data: :class:`FieldData`

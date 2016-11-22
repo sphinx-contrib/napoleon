@@ -65,6 +65,7 @@ class SampleError(Exception):
     def __special_undoc__(self):
         pass
 
+
 SampleNamedTuple = namedtuple('SampleNamedTuple', 'user_id block_type def_id')
 
 
