@@ -3,6 +3,14 @@
 This file describes user-visible changes between the extension versions.
 
 
+Version 0.6.0 (2016-11-23)
+--------------------------
+
+ * No longer prevents other 'autodoc-skip-member' handlers from running.
+   If Napoleon doesn't care if a member is skipped, then the decision is
+   deferred to autodoc and other extensions that handle 'autodoc-skip-member'.
+
+
 Version 0.5.4 (2016-11-21)
 --------------------------
 
