@@ -36,6 +36,10 @@ Version 0.5.1 (2016-06-12)
  * Fixes bad formatting when a literal block is opened on the first line of a
    parameter description
  * Corrects minor formatting issue on example NumPy Attributes section
+ * Adds config option "napoleon_include_init_with_doc" to force inclusion
+   of standalone __init__ method in generated docs
+ * Adds config option "napoleon_use_keyword" to render keyword args with type
+   links
 
 
 Version 0.5.0 (2016-02-20)
