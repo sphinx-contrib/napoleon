@@ -9,8 +9,6 @@
     :license: BSD, see LICENSE for details.
 """
 
-from six import iteritems
-
 from sphinxcontrib.napoleon._version import __version__
 from sphinxcontrib.napoleon.docstring import GoogleDocstring, NumpyDocstring
 
@@ -19,7 +17,7 @@ if False:
     from typing import Any, Dict, List  # NOQA
 
 
-class Config(object):
+class Config:
     """Sphinx napoleon extension settings in `conf.py`.
 
     Listed below are all the settings used by napoleon and their default
@@ -271,9 +269,9 @@ class Config(object):
 
     def __init__(self, **settings):
         # type: (Any) -> None
-        for name, (default, rebuild) in iteritems(self._config_values):
+        for name, (default, rebuild) in self._config_values.items():
             setattr(self, name, default)
-        for name, value in iteritems(settings):
+        for name, value in settings.items():
             setattr(self, name, value)
 
 
@@ -302,7 +300,8 @@ def setup(app):
     """
     from sphinx.application import Sphinx
     if not isinstance(app, Sphinx):
-        return  # probably called by tests
+        # probably called by tests
+        return {'version': __version__, 'parallel_read_safe': True}
 
     _patch_python_domain()
 
@@ -310,7 +309,7 @@ def setup(app):
     app.connect('autodoc-process-docstring', _process_docstring)
     app.connect('autodoc-skip-member', _skip_member)
 
-    for name, (default, rebuild) in iteritems(Config._config_values):
+    for name, (default, rebuild) in Config._config_values.items():
         app.add_config_value(name, default, rebuild)
     return {'version': __version__, 'parallel_read_safe': True}
 
