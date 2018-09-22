@@ -242,8 +242,8 @@ Google style with types in docstrings::
 Configuration
 =============
 
-.. autoclass:: sphinxcontrib.napoleon.Config
-   :noindex:
+For detailed configuration options see :class:`sphinxcontrib.napoleon.Config`.
+
 
 Index
 =====

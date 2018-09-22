@@ -51,9 +51,9 @@ napoleon_use_admonition_for_references = False
 # If False, use Sphinx .. attribute:: directive for instance variables:
 #     .. attribute:: attr1
 #
-#        *type*
-#
 #        Description of attr1.
+#
+#        :type: type
 napoleon_use_ivar = False
 
 # If True, use Sphinx :param: directive for function parameters:
@@ -85,8 +85,7 @@ needs_sphinx = '1.2'
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['sphinx.ext.autodoc',
-              'sphinx.ext.doctest',
+extensions = ['sphinx.ext.doctest',
               'sphinx.ext.coverage',
               'sphinx.ext.viewcode',
               'sphinx.ext.intersphinx',
@@ -94,7 +93,7 @@ extensions = ['sphinx.ext.autodoc',
 
 intersphinx_mapping = {
   'pockets': ('https://pockets.readthedocs.io/en/latest/', None),
-  'python': ('https://docs.python.org/3.4', None),
+  'python': ('https://docs.python.org/3', None),
   'sphinx': ('http://sphinx.readthedocs.io/en/latest/', None)
 }
 
