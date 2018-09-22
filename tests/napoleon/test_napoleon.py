@@ -1,19 +1,22 @@
 # -*- coding: utf-8 -*-
-# Copyright 2014 Rob Ruana
-# Licensed under the BSD License, see LICENSE file for details.
+"""
+    test_napoleon
+    ~~~~~~~~~~~~~
 
-"""Tests for :mod:`sphinxcontrib.napoleon.__init__` module."""
+    Tests for :mod:`sphinxcontrib.napoleon.__init__` module.
 
-try:
-    # Python >=3.3
-    from unittest import mock
-except ImportError:
-    import mock
+
+    :copyright: Copyright 2013-2018 by Rob Ruana, see AUTHORS.
+    :license: BSD, see LICENSE for details.
+"""
+
 from collections import namedtuple
-from sphinx.application import Sphinx
-from sphinxcontrib.napoleon import (_process_docstring, _skip_member, Config,
-                                    setup)
 from unittest import TestCase
+
+import mock
+
+from sphinx.application import Sphinx
+from sphinxcontrib.napoleon import _process_docstring, _skip_member, Config, setup
 
 
 def _private_doc():

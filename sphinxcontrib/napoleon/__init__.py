@@ -1,21 +1,22 @@
 # -*- coding: utf-8 -*-
-# Copyright 2014 Rob Ruana
-# Licensed under the BSD License, see LICENSE file for details.
+"""
+    sphinxcontrib.napoleon
+    ~~~~~~~~~~~~~~~~~~~~~~
 
-"""Sphinx napoleon extension -- support for NumPy and Google style docstrings.
+    Support for NumPy and Google style docstrings.
+
+    :copyright: Copyright 2013-2018 by Rob Ruana, see AUTHORS.
+    :license: BSD, see LICENSE for details.
 """
 
-import sys
+from six import iteritems
 
-from six import PY2, iteritems
-
-from sphinxcontrib.napoleon.docstring import GoogleDocstring, NumpyDocstring
 from sphinxcontrib.napoleon._version import __version__
-assert __version__  # silence pyflakes
+from sphinxcontrib.napoleon.docstring import GoogleDocstring, NumpyDocstring
 
 if False:
     # For type annotation
-    from typing import Any  # NOQA
+    from typing import Any, Dict, List  # NOQA
 
 
 class Config(object):
@@ -23,13 +24,12 @@ class Config(object):
 
     Listed below are all the settings used by napoleon and their default
     values. These settings can be changed in the Sphinx `conf.py` file. Make
-    sure that both "sphinx.ext.autodoc" and "sphinxcontrib.napoleon" are
-    enabled in `conf.py`::
+    sure that "sphinxcontrib.napoleon" is enabled in `conf.py`::
 
         # conf.py
 
         # Add any Sphinx extension module names here, as strings
-        extensions = ['sphinx.ext.autodoc', 'sphinxcontrib.napoleon']
+        extensions = ['sphinxcontrib.napoleon']
 
         # Napoleon settings
         napoleon_google_docstring = True
@@ -44,9 +44,10 @@ class Config(object):
         napoleon_use_param = True
         napoleon_use_rtype = True
         napoleon_use_keyword = True
+        napoleon_custom_sections = None
 
     .. _Google style:
-       http://google.github.io/styleguide/pyguide.html
+       https://google.github.io/styleguide/pyguide.html
     .. _NumPy style:
        https://github.com/numpy/numpy/blob/master/doc/HOWTO_DOCUMENT.rst.txt
 
@@ -238,6 +239,19 @@ class Config(object):
 
             :returns: *bool* -- True if successful, False otherwise
 
+    napoleon_custom_sections : :obj:`list` (Defaults to None)
+        Add a list of custom sections to include, expanding the list of parsed sections.
+
+        The entries can either be strings or tuples, depending on the intention:
+          * To create a custom "generic" section, just pass a string.
+          * To create an alias for an existing section, pass a tuple containing the
+            alias name and the original, in that order.
+
+        If an entry is just a string, it is interpreted as a header for a generic
+        section. If the entry is a tuple/list/indexed container, the first entry
+        is the name of the section, the second is the section key to emulate.
+
+
     """
     _config_values = {
         'napoleon_google_docstring': (True, 'env'),
@@ -251,7 +265,8 @@ class Config(object):
         'napoleon_use_ivar': (False, 'env'),
         'napoleon_use_param': (True, 'env'),
         'napoleon_use_rtype': (True, 'env'),
-        'napoleon_use_keyword': (True, 'env')
+        'napoleon_use_keyword': (True, 'env'),
+        'napoleon_custom_sections': (None, 'env')
     }
 
     def __init__(self, **settings):
@@ -287,11 +302,11 @@ def setup(app):
     """
     from sphinx.application import Sphinx
     if not isinstance(app, Sphinx):
-        return  # type: ignore
-                # probably called by tests
+        return  # probably called by tests
 
     _patch_python_domain()
 
+    app.setup_extension('sphinx.ext.autodoc')
     app.connect('autodoc-process-docstring', _process_docstring)
     app.connect('autodoc-skip-member', _skip_member)
 
@@ -308,14 +323,13 @@ def _patch_python_domain():
         pass
     else:
         import sphinx.domains.python
-        import sphinx.locale  # type: ignore
-        l_ = sphinx.locale.lazy_gettext
+        from sphinx.locale import _
         for doc_field in sphinx.domains.python.PyObject.doc_field_types:
             if doc_field.name == 'parameter':
                 doc_field.names = ('param', 'parameter', 'arg', 'argument')
                 break
         sphinx.domains.python.PyObject.doc_field_types.append(
-            PyTypedField('keyword', label=l_('Keyword Arguments'),
+            PyTypedField('keyword', label=_('Keyword Arguments'),
                          names=('keyword', 'kwarg', 'kwparam'),
                          typerolename='obj', typenames=('paramtype', 'kwtype'),
                          can_collapse=True))
@@ -419,34 +433,26 @@ def _skip_member(app, what, name, obj, skip, options):
     if name != '__weakref__' and has_doc and is_member:
         cls_is_owner = False
         if what == 'class' or what == 'exception':
-            if PY2:
-                cls = getattr(obj, 'im_class', getattr(obj, '__objclass__',
-                              None))
-                cls_is_owner = (cls and hasattr(cls, name) and
-                                name in cls.__dict__)
-            elif sys.version_info >= (3, 3):
-                qualname = getattr(obj, '__qualname__', '')
-                cls_path, _, _ = qualname.rpartition('.')
-                if cls_path:
-                    try:
-                        if '.' in cls_path:
-                            import importlib
-                            import functools
+            qualname = getattr(obj, '__qualname__', '')
+            cls_path, _, _ = qualname.rpartition('.')
+            if cls_path:
+                try:
+                    if '.' in cls_path:
+                        import importlib
+                        import functools
 
-                            mod = importlib.import_module(obj.__module__)
-                            mod_path = cls_path.split('.')
-                            cls = functools.reduce(getattr, mod_path, mod)
-                        else:
-                            cls = obj.__globals__[cls_path]
-                    except Exception:
-                        cls_is_owner = False
+                        mod = importlib.import_module(obj.__module__)
+                        mod_path = cls_path.split('.')
+                        cls = functools.reduce(getattr, mod_path, mod)
                     else:
-                        cls_is_owner = (cls and hasattr(cls, name) and
-                                        name in cls.__dict__)
-                else:
+                        cls = obj.__globals__[cls_path]
+                except Exception:
                     cls_is_owner = False
+                else:
+                    cls_is_owner = (cls and hasattr(cls, name) and  # type: ignore
+                                    name in cls.__dict__)
             else:
-                cls_is_owner = True
+                cls_is_owner = False
 
         if what == 'module' or cls_is_owner:
             is_init = (name == '__init__')
