@@ -431,7 +431,13 @@ def _skip_member(app, what, name, obj, skip, options):
     is_member = (what == 'class' or what == 'exception' or what == 'module')
     if name != '__weakref__' and has_doc and is_member:
         cls_is_owner = False
-        if what == 'class' or what == 'exception':
+        import six
+        if six.PY2 and (what == 'class' or what == 'exception'):
+            cls = getattr(obj, 'im_class', getattr(obj, '__objclass__',
+                          None))
+            cls_is_owner = (cls and hasattr(cls, name) and
+                            name in cls.__dict__)
+        elif what == 'class' or what == 'exception':
             qualname = getattr(obj, '__qualname__', '')
             cls_path, _, _ = qualname.rpartition('.')
             if cls_path:
