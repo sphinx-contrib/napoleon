@@ -65,8 +65,8 @@ Getting Started
 
        # conf.py
 
-       # Add autodoc and napoleon to the extensions list
-       extensions = ['sphinx.ext.autodoc', 'sphinxcontrib.napoleon']
+       # Add napoleon to the extensions list
+       extensions = ['sphinxcontrib.napoleon']
 
 2. Use `sphinx-apidoc` to build your API documentation::
 
