@@ -3,6 +3,27 @@
 This file describes user-visible changes between the extension versions.
 
 
+Version 0.7 (2018-09-23)
+------------------------
+
+ * Drops support for Python 2.6 and 3.3 (may still work, but no longer tested)
+ * Adds support for Python 3.7
+ * Automatically adds 'sphinx.ext.autodoc' extension if needed
+ * Improved rendering of "Raises" section
+ * Improved type rendering for "Attributes" section
+ * Improved support for inline attribute docstrings
+ * Adds :ivar: type qualification
+ * Adds user defined custom sections
+ * Adds the following system defined sections:
+    * Attention
+    * Caution
+    * Danger
+    * Error
+    * Hint
+    * Important
+    * Tip
+
+
 Version 0.6.1 (2017-02-27)
 --------------------------
 
