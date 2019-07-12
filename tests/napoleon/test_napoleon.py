@@ -13,7 +13,10 @@
 from collections import namedtuple
 from unittest import TestCase
 
-import mock
+try:
+    from unittest import mock
+except ImportError:
+    import mock
 
 from sphinx.application import Sphinx
 from sphinxcontrib.napoleon import _process_docstring, _skip_member, Config, setup

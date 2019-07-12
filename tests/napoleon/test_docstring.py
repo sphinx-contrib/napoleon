@@ -15,7 +15,10 @@ from inspect import cleandoc
 from textwrap import dedent
 from unittest import TestCase
 
-import mock
+try:
+    from unittest import mock
+except ImportError:
+    import mock
 
 from sphinxcontrib.napoleon import Config
 from sphinxcontrib.napoleon.docstring import GoogleDocstring, NumpyDocstring
