@@ -693,11 +693,20 @@ class GoogleDocstring(UnicodeMixin):
 
     def _parse_parameters_section(self, section):
         # type: (unicode) -> List[unicode]
+
+        labels = {
+            'args': _('Parameters'),
+            'arguments': _('Parameters'),
+            'parameters': _('Parameters'),
+        }  # type: Dict[unicode, unicode]
+        use_admonition = self._config.napoleon_use_admonition_for_examples
+        label = labels.get(section.lower(), section)
+
         fields = self._consume_fields()
         if self._config.napoleon_use_param:
             return self._format_docutils_params(fields)
         else:
-            return self._format_fields(_('Parameters'), fields)
+            return self._format_fields(label, fields)
 
     def _parse_raises_section(self, section):
         # type: (unicode) -> List[unicode]
