@@ -61,6 +61,7 @@ def function_with_types_in_docstring(param1, param2):
         https://www.python.org/dev/peps/pep-0484/
 
     """
+    pass
 
 
 def function_with_pep484_type_annotations(param1: int, param2: str) -> bool:
@@ -74,6 +75,7 @@ def function_with_pep484_type_annotations(param1: int, param2: str) -> bool:
         The return value. True for success, False otherwise.
 
     """
+    pass
 
 
 def module_level_function(param1, param2=None, *args, **kwargs):
