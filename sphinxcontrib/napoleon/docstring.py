@@ -13,7 +13,7 @@
 
 import inspect
 import re
-from collections import Callable
+from collections.abc import Callable
 from functools import partial
 
 from six import string_types, u
