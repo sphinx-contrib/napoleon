@@ -42,6 +42,11 @@ _enumerated_list_regex = re.compile(
     r'(?(paren)\)|\.)(\s+\S|\s*$)')
 
 
+from collections import namedtuple
+DocstringParam = namedtuple('DocstringParam', 'name type desc')
+Examples = namedtuple('Examples', 'desc')
+
+
 class GoogleDocstring(UnicodeMixin):
     """Convert Google style docstrings to reStructuredText.
 
@@ -175,6 +180,7 @@ class GoogleDocstring(UnicodeMixin):
                 'yields': self._parse_yields_section,
             }  # type: Dict[unicode, Callable]
 
+        self.params = []
         self._load_custom_sections()
 
         self._parse()
@@ -387,6 +393,8 @@ class GoogleDocstring(UnicodeMixin):
         lines = []
         for _name, _type, _desc in fields:
             _desc = self._strip_empty(_desc)
+            self.params.append(DocstringParam(_name, _type, _desc))
+
             if any(_desc):
                 _desc = self._fix_field_desc(_desc)
                 field = ':%s %s: ' % (field_role, _name)
@@ -396,6 +404,7 @@ class GoogleDocstring(UnicodeMixin):
 
             if _type:
                 lines.append(':%s %s: %s' % (type_role, _name, _type))
+
         return lines + ['']
 
     def _format_field(self, _name, _type, _desc):
