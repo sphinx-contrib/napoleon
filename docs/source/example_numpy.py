@@ -93,8 +93,7 @@ def function_with_pep484_type_annotations(param1: int, param2: str) -> bool:
 
     Returns
     -------
-    bool
-        True if successful, False otherwise.
+    True if successful, False otherwise.
 
     """
 
