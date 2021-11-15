@@ -13,7 +13,10 @@
 
 import inspect
 import re
-from collections import Callable
+try:
+    from collections.abc import Callable
+except ImportError:
+    from collections import Callable
 from functools import partial
 
 from six import string_types, u
