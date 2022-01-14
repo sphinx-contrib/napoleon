@@ -220,6 +220,40 @@ class GoogleDocstringTest(BaseDocstringTest):
                   description of return value
         """
     ), (
+    #     """
+    #     Single line summary
+
+    #     Return:
+    #       str: Extended
+    #       description of return value
+    #       bool: Other
+    #       return value
+    #     """,
+    #     """
+    #     Single line summary
+
+    #     :returns: *str* -- Extended
+    #               description of return value
+
+    #               *bool* -- Other
+    #               return value
+
+    #     """
+    # ), (
+    #     """
+    #     Single line summary
+
+    #     Returns:
+    #       str: Extended
+    #         description of return value
+    #     """,
+    #     """
+    #     Single line summary
+
+    #     :returns: *str* -- Extended
+    #               description of return value
+    #     """
+    # ), (
         """
         Single line summary
 
@@ -346,6 +380,8 @@ class GoogleDocstringTest(BaseDocstringTest):
         for docstring, expected in self.docstrings:
             actual = str(GoogleDocstring(dedent(docstring), config))
             expected = dedent(expected)
+            if (expected != actual):
+                print(actual)
             self.assertEqual(expected, actual)
 
     def test_parameters_with_class_reference(self):
@@ -1140,12 +1176,17 @@ class NumpyDocstringTest(BaseDocstringTest):
         str
             Extended
             description of yielded value
+        bool
+            Extended
+            description of yielded value
         """,
         """
         Single line summary
 
-        :Yields: *str* -- Extended
-                 description of yielded value
+        :Yields: * *str* -- Extended
+                   description of yielded value
+                 * *bool* -- Extended
+                   description of yielded value
         """
     ), (
         """
